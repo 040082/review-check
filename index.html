@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한국폴리텍대학 교육운영계획서 검토 지원 프로그램</title>
+<style>
+:root{--navy:#0b2a5b;--navy2:#071a3a;--teal:#2dd4bf;--ok:#16a34a;--bad:#dc2626;--chk:#d97706;--line:#d9e1ec}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:15px;color:#0f172a;min-height:100vh;
+ background:radial-gradient(1200px 700px at 85% -10%,#1d4f9c 0%,rgba(11,42,91,0) 60%),linear-gradient(160deg,#0b2a5b,#071a3a);background-attachment:fixed}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 60px}
+.screen{display:none}.screen.on{display:block}
+h1{color:#fff;font-size:30px;line-height:1.3;margin:6px 0 4px}h1 em{font-style:normal;color:var(--teal)}
+.sub{color:#b9c8e3;margin:0 0 26px}
+.tag{display:inline-block;color:var(--teal);border:1px solid rgba(45,212,191,.5);border-radius:99px;padding:3px 12px;font-size:13px;margin-bottom:8px}
+.bigs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px}
+.big{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:34px 26px;color:#fff;cursor:pointer;backdrop-filter:blur(6px);text-align:left;font:inherit;transition:.15s}
+.big:hover{background:rgba(45,212,191,.15);border-color:var(--teal);transform:translateY(-2px)}
+.big b{display:block;font-size:24px;margin-bottom:8px}.big span{color:#b9c8e3;font-size:14px}
+.links{margin-top:30px;text-align:center}.links a{color:#b9c8e3;margin:0 14px;cursor:pointer;text-decoration:underline}
+.topbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.topbar h2{color:#fff;margin:0;font-size:22px;flex:1}
+.card{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.card h3{margin:0 0 12px;font-size:17px}
+.glass{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px}
+button.b{background:linear-gradient(90deg,#14b8a6,#2563eb);color:#fff;border:0;border-radius:10px;padding:10px 18px;font:inherit;font-weight:700;cursor:pointer}
+button.b:disabled{opacity:.5;cursor:not-allowed}
+button.g{background:#eef2f7;color:#0f172a;border:1px solid var(--line);border-radius:10px;padding:8px 14px;font:inherit;cursor:pointer}
+button.g.light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+button.d{background:#fff;color:var(--bad);border:1px solid #f0b4b4;border-radius:8px;padding:4px 9px;font:inherit;cursor:pointer}
+button.mini{padding:3px 8px;border-radius:7px;border:1px solid var(--line);background:#f8fafc;cursor:pointer;font:inherit}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px 10px 0 0;padding:9px 16px;font:inherit;cursor:pointer}
+.tabs button.on{background:#fff;color:var(--navy);font-weight:700}
+label.f{display:block;font-size:13px;color:#475569;margin:0 0 3px}
+input[type=text],input[type=password],select,textarea{width:100%;padding:8px 10px;border:1px solid #c5d0e0;border-radius:8px;font:inherit;background:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border:1px solid var(--line);padding:5px 6px;vertical-align:top;text-align:left}
+th{background:#eef4fb;white-space:nowrap}
+td input[type=text],td select{padding:5px 6px;min-width:60px}
+.note{font-size:13px;color:#64748b;margin:6px 0}
+.hint{background:#fff7e6;border:1px solid #fcd9a0;border-radius:8px;padding:8px 12px;font-size:13px;margin:8px 0}
+.drop{border:2px dashed #94a3b8;border-radius:14px;padding:30px;text-align:center;background:#f8fafc;cursor:pointer}
+.drop.over{border-color:var(--teal);background:#e6fbf7}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;color:#fff;font-weight:700;font-size:13px}
+.pill.ok{background:var(--ok)}.pill.bad{background:var(--bad)}.pill.chk{background:var(--chk)}
+tr.v-ok td:first-child{border-left:5px solid var(--ok)}tr.v-bad td:first-child{border-left:5px solid var(--bad)}tr.v-chk td:first-child{border-left:5px solid var(--chk)}
+.sum{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sum div{flex:1;min-width:110px;background:#f1f5f9;border-radius:10px;padding:10px;text-align:center}
+.sum b{display:block;font-size:22px}
+.warn{background:#fff7e6;border:1px solid #fcd9a0;color:#7a4b00;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:13.5px}
+.err{background:#fde8e8;border:1px solid #f4b5b5;color:#8a1c1c;border-radius:8px;padding:8px 12px;margin:6px 0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:14px}
+.modal.on{display:flex}.modal .box{background:#fff;border-radius:14px;padding:22px;max-width:520px;width:100%;max-height:90vh;overflow:auto}
+.modal .box.wide{max-width:1000px}
+.msg{min-height:20px;font-size:14px;margin-top:8px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:99px;display:none;z-index:99}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.bigs,.row2{grid-template-columns:1fr}h1{font-size:23px}}
+@media print{
+ @page{size:A4 landscape;margin:10mm}
+ body{background:#fff}body.printing .screen,body.printing .modal,body.printing #toast{display:none!important}
+ body.printing #printArea{display:block!important}
+ #printArea{color:#000}#printArea table{font-size:10.5px}
+}
+#printArea{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 1. 메인 -->
+<section id="s-main" class="screen on">
+  <span class="tag">직업교육과정 검수</span>
+  <h1>한국폴리텍대학<br><em>교육운영계획서 검토 지원 프로그램</em></h1>
+  <p class="sub">검수할 과정을 선택하세요. 교육운영계획서 PDF를 읽어 2027학년도 세부기준대로 작성 여부를 확인합니다.</p>
+  <div class="bigs">
+    <button class="big" onclick="openCourse('general')"><b>일반계고위탁과정</b><span>세부기준 설정 · 교과과정 체크하기</span></button>
+    <button class="big" onclick="openCourse('gineungjang')"><b>기능장 과정</b><span>세부기준 설정 · 교과과정 체크하기</span></button>
+  </div>
+  <div class="links"><a onclick="gotoHistory()">검수 내역</a><a onclick="adminGate('admin-home')">관리자</a></div>
+</section>
+
+<!-- 2. 과정 상세 -->
+<section id="s-course" class="screen">
+  <div class="topbar"><h2 id="courseTitle"></h2><button class="g light" onclick="show('s-main')">메인으로</button></div>
+  <div class="bigs">
+    <button class="big" onclick="adminGate('criteria')"><b>세부기준 설정</b><span>관리자 로그인 후 검수 기준을 입력합니다</span></button>
+    <button class="big" onclick="openCheck()"><b>교과과정 체크하기</b><span>교육운영계획서 PDF를 올려 검수합니다</span></button>
+  </div>
+</section>
+
+<!-- 3-a. 관리자 홈 -->
+<section id="s-admin-home" class="screen">
+  <div class="topbar"><h2>관리자</h2><button class="g light" onclick="logout()">로그아웃</button><button class="g light" onclick="show('s-main')">메인으로</button></div>
+  <div class="bigs">
+    <button class="big" onclick="show('s-pick')"><b>세부기준 설정</b><span>기능장 / 일반계고위탁 기준 입력</span></button>
+    <button class="big" onclick="gotoHistory()"><b>검수 내역</b><span>저장된 검수 결과 조회</span></button>
+  </div>
+</section>
+
+<!-- 3-b. 과정 선택 (관리자) -->
+<section id="s-pick" class="screen">
+  <div class="topbar"><h2>세부기준을 설정할 과정 선택</h2><button class="g light" onclick="show('s-main')">메인으로</button></div>
+  <div class="bigs">
+    <button class="big" onclick="openCriteria('gineungjang')"><b>기능장 과정</b><span>세부기준 입력</span></button>
+    <button class="big" onclick="openCriteria('general')"><b>일반계고위탁과정</b><span>세부기준 입력</span></button>
+  </div>
+</section>
+
+<!-- 3-c. 기준 입력 -->
+<section id="s-criteria" class="screen">
+  <div class="topbar"><h2 id="critTitle"></h2>
+    <button class="b" id="btnSaveCrit" onclick="saveCrit()">저장</button>
+    <button class="g light" onclick="loadDefaultCrit()">기본값 불러오기</button>
+    <button class="g light" onclick="cancelCrit()">변경 취소</button>
+    <button class="g light" onclick="show('s-pick')">과정 선택</button></div>
+  <div class="msg" id="critMsg" style="color:#fff"></div>
+  <div class="tabs" id="critTabs"></div>
+  <div id="critBody"></div>
+</section>
+
+<!-- 4. 검수 -->
+<section id="s-check" class="screen">
+  <div class="topbar"><h2 id="checkTitle"></h2><button class="g light" onclick="openCourse(curCourse)">뒤로</button><button class="g light" onclick="show('s-main')">메인으로</button></div>
+  <div class="card">
+    <h3>1. 검수 대상 정보</h3>
+    <div class="grid">
+      <div><label class="f">캠퍼스</label><select id="cCampus"><option value="">선택</option></select></div>
+      <div><label class="f">학과</label><input type="text" id="cDept"></div>
+      <div><label class="f">담당자명</label><input type="text" id="cMgr"></div>
+      <div><label class="f">편성 유형</label><select id="cType"></select></div>
+    </div>
+    <div class="note">PDF를 읽으면 캠퍼스와 학과가 자동으로 채워집니다. 틀리면 직접 고치세요.</div>
+  </div>
+  <div class="card">
+    <h3>2. 교육운영계획서 PDF</h3>
+    <div class="drop" id="drop" onclick="document.getElementById('file').click()">
+      <b>PDF 파일을 여기에 끌어 놓거나 클릭해서 선택하세요</b>
+      <div class="note" id="fileInfo">선택된 파일 없음</div>
+    </div>
+    <input type="file" id="file" accept="application/pdf,.pdf" style="display:none">
+    <div style="margin-top:12px"><button class="b" id="btnRead" onclick="readPdf()" disabled>교과과정 읽어오기</button>
+      <span id="readProg" class="note"></span></div>
+    <div id="readOut"></div>
+  </div>
+  <div class="card" id="runCard" style="display:none">
+    <button class="b" id="btnRun" onclick="runCheck()">검수 실행</button>
+    <span class="note">기준 버전: <span id="critVer">-</span></span>
+  </div>
+  <div class="card" id="resCard" style="display:none"></div>
+</section>
+
+<!-- 5. 검수 내역 -->
+<section id="s-history" class="screen">
+  <div class="topbar"><h2>검수 내역</h2><button class="g light" onclick="logout();show('s-main')">로그아웃</button><button class="g light" onclick="show('s-main')">메인으로</button></div>
+  <div class="card">
+    <div class="grid">
+      <div><label class="f">과정</label><select id="hCourse"><option value="">전체</option><option>일반계고위탁과정</option><option>기능장 과정</option></select></div>
+      <div><label class="f">캠퍼스</label><select id="hCampus"><option value="">전체</option></select></div>
+      <div><label class="f">판정</label><select id="hVerdict"><option value="">전체</option><option>적합</option><option>부적합</option><option>확인필요</option></select></div>
+      <div><label class="f">시작일</label><input type="text" id="hFrom" placeholder="2026-11-01"></div>
+      <div><label class="f">종료일</label><input type="text" id="hTo" placeholder="2026-11-30"></div>
+      <div><label class="f">검색어(학과·담당자·번호)</label><input type="text" id="hQ"></div>
+    </div>
+    <div style="margin-top:10px"><button class="b" onclick="renderHistory()">조회</button> <button class="g" onclick="historyCsv()">CSV 다운로드</button> <span class="note" id="hCount"></span></div>
+  </div>
+  <div class="card tw"><table id="hTable"></table></div>
+</section>
+</div>
+
+<!-- 로그인 모달 -->
+<div class="modal" id="mLogin"><div class="box">
+  <h3 style="margin-top:0">관리자 로그인</h3>
+  <label class="f">관리자 비밀번호</label><input type="password" id="pw" onkeydown="if(event.key==='Enter')doLogin()">
+  <div class="msg" id="loginMsg"></div>
+  <div style="margin-top:10px;display:flex;gap:8px"><button class="b" id="btnLogin" onclick="doLogin()">로그인</button><button class="g" onclick="closeLogin()">취소</button></div>
+</div></div>
+<!-- 상세 모달 -->
+<div class="modal" id="mDetail"><div class="box wide"><div id="detailBody"></div><div style="margin-top:12px"><button class="g" onclick="document.getElementById('mDetail').classList.remove('on')">닫기</button></div></div></div>
+<div id="toast"></div>
+<div id="printArea"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* ============================================================
+   ★ 여기 한 곳만 고치세요: Apps Script 웹 앱 주소(…/exec)
+   ============================================================ */
+var API_URL = "https://script.google.com/macros/s/AKfycby8N1qY0F-_oR0ZXkSH2hR4_ObJaRY-HXIJJ13j5telu93xZwRKnsrb4YkrdGcoA1AVBQ/exec";
+
+/* ===== 기본 기준값 (2027학년도 세부기준 붙임 4·5 기준) =====
+   관리자 화면의 [기본값 불러오기]가 이 값을 사용합니다. 화면에서 고치고 [저장]하면 "기준" 시트에 저장됩니다. */
+function defaultCriteria_(course) {
+  var AI9 = 'AI리터러시,생성형AI,AI활용,AI코딩,피지컬AI이해,멀티모달AI,바이브코딩,데이터분석및시각화,AI에이전트';
+  var common = function (id, name, method, desc, use) { return { id: id, name: name, method: method, desc: desc, use: use }; };
+  if (course === 'gineungjang') {
+    return {
+      course: 'gineungjang', courseName: '기능장 과정',
+      basic: {
+        hoursPerCredit: 16, theoryPct: 40, practicePct: 60, tolerance: 10,
+        theoryCats: '교양,기초기술,교직,전공이론',
+        types: [
+          { name: '야간2년', hours: 960, credits: 60, cLib: 3, cBasic: 10, cTeach: 7, cMajor: 40, termMin: 10, termMax: 20, teachTerm: '4' },
+          { name: '야간1년', hours: 640, credits: 40, cLib: 3, cBasic: 6, cTeach: 7, cMajor: 24, termMin: 17, termMax: 23, teachTerm: '2' }
+        ],
+        courseCreditMin: 1, courseCreditMax: 4, courseMaxHours: '', nonNcsMax: '',
+        majorMin: '', projectMin: '', creditCheck: true
+      },
+      required: [
+        { name: '직업교육심리', keywords: '', minH: 32, maxH: '', term: '', required: true },
+        { name: '직업윤리', keywords: '', minH: 16, maxH: '', term: '', required: true },
+        { name: '공업경영일반', keywords: '', minH: 32, maxH: '', term: '', required: true }
+      ],
+      topics: [
+        { label: '직업윤리 필수 교수요목(기업경영과 사회적기업 2h)', courses: '직업윤리', keywords: '기업경영,사회적기업', hours: 2 }
+      ],
+      groups: {
+        liberal: { use: true, names: '직업윤리,직업교육심리', keywords: '', minH: 48, maxH: '', allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '' },
+        safety: { use: true, names: '', keywords: '산업안전', minH: 16, maxH: '', allowedTerms: '2,3,4', forbiddenTerms: '1', onlineMin: 6, extraNames: '' },
+        industryAI: { use: true, names: '', keywords: '', minH: 20, maxH: 40, allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '' },
+        aiUse: { use: true, names: AI9, keywords: '', minH: 20, maxH: '', allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '' }
+      },
+      rules: [
+        { cat: '교직', name: 'NCS이해및활용', minH: 32, maxH: 32, term: '', required: true, basis: '기준서 교직교과 2학점', note: '야간1년 1-2학기 / 야간2년 2-2학기' },
+        { cat: '교직', name: 'NCS교육과정개발', minH: 32, maxH: 32, term: '', required: true, basis: '기준서 교직교과 2학점', note: '' },
+        { cat: '교직', name: 'NCS역량평가', minH: 48, maxH: 48, term: '', required: true, basis: '기준서 교직교과 3학점', note: '' }
+      ],
+      checklist: [
+        common('total_hours', '총 운영시간·학점 충족', 'auto', '교과별 시간 합계와 편성 유형 기준 비교', true),
+        common('ratio', '이론/실습 비율 허용오차 이내', 'auto', '이론 40% 실습 60% ±허용오차', true),
+        common('credits_by_cat', '구분별 편성학점(교양·기초기술·교직·전공)', 'auto', '편성 유형별 학점 비교', true),
+        common('semester_credits', '학기별 수강학점 범위', 'auto', '로드맵 총계행 기준', true),
+        common('required', '필수 편성교과(시간·학기)', 'auto', '필수 편성교과와 교과목 편성기준 표', true),
+        common('teach_term', '교직교과 편성 학기', 'auto', '야간1년 1-2학기, 야간2년 2-2학기', true),
+        common('topics', '필수 교수요목 반영', 'auto', '교수계획 내 키워드 확인', true),
+        common('liberal_min', '교양교과 시간 충족', 'auto', '교양교과 시간 합계', true),
+        common('major_hours', '전공교과 기준시간 충족', 'auto', '기준값 입력 시에만 검사', true),
+        common('project_hours', '프로젝트실습 시간 충족', 'auto', '기준값 입력 시에만 검사', true),
+        common('safety', '산업안전교과 편성', 'auto', '시간·학기·연구실안전 6h', true),
+        common('ai_use', 'AI활용 교과 편성', 'auto', 'Pool 1과목 이상, 20h 이상', true),
+        common('industry_ai', '산업AI 교과 편성', 'auto', '20~40h 필수', true),
+        common('credit_range', '과목당 학점 범위', 'auto', '과목당 1~4학점', true),
+        common('name_format', '신규 교과명 형식', 'auto', '숫자·특수문자·10자 초과', true),
+        common('dup_names', '교과명 중복 없음', 'auto', '', true),
+        common('one_term', '1개 교과 2개 학기 이상 편성 불가', 'auto', '', true),
+        common('ncs_units', 'NCS 능력단위 규칙', 'auto', '교과당 4개 이내, 중복 불가, 수준 L3~L5', true),
+        common('cross_check', '표지·총괄표·교수계획 일치', 'auto', '읽기 오류 점검', true),
+        common('m_newdept', '신설·개편 학과 교과 변경 제한', 'manual', '2024년 이후 선정 학과는 변경 제한 확인', true),
+        common('m_mainjob', '주 직종 표기(시간이 가장 많은 세분류)', 'manual', '', true)
+      ],
+      format: { nameRule: true, noDigit: true, noSpecial: true, maxLen: 10, noDup: true, oneTerm: true, ncsMaxUnits: 4, ncsNoDup: true, levelMin: 3, levelMax: 5, knownNames: 'AI활용CAM프로그래밍' }
+    };
+  }
+  return {
+    course: 'general', courseName: '일반계고위탁과정',
+    basic: {
+      hoursPerCredit: 16, theoryPct: 20, practicePct: 80, tolerance: 10,
+      theoryCats: '교양,기초기술,교직,전공이론',
+      types: [ { name: '1년과정', hours: 1200, credits: 75, cLib: '', cBasic: '', cTeach: '', cMajor: '', termMin: '', termMax: '', teachTerm: '' } ],
+      courseCreditMin: '', courseCreditMax: '', courseMaxHours: 120, nonNcsMax: 4,
+      majorMin: '', projectMin: '', creditCheck: false
+    },
+    required: [
+      { name: '성공적인직업생활', keywords: '', minH: 16, maxH: '', term: '', required: true },
+      { name: '인체구조와기능', keywords: '', minH: 16, maxH: '', term: '', required: true }
+    ],
+    topics: [
+      { label: '필수 교수요목(합 11h: 인사조직 3, 지적재산권 3, 사회적경제 2, 근로기준법 1, 양성평등 2)', courses: '성공적인직업생활,인체구조와기능', keywords: '인사조직,특허,지적재산,사회적경제,근로기준,양성평등', hours: 11 }
+    ],
+    groups: {
+      liberal: { use: true, names: '성공적인직업생활,인체구조와기능,참人폴리텍생활과비전', keywords: '', minH: 32, maxH: '', allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '' },
+      safety: { use: true, names: '', keywords: '산업안전', minH: 16, maxH: '', allowedTerms: '2', forbiddenTerms: '1', onlineMin: 6, extraNames: '' },
+      industryAI: { use: false, names: '', keywords: '', minH: '', maxH: '', allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '' },
+      aiUse: { use: true, names: AI9, keywords: '', minH: 16, maxH: '', allowedTerms: '', forbiddenTerms: '', onlineMin: '', extraNames: '비즈니스커뮤니케이션,프로그래밍,정보처리와관리' }
+    },
+    rules: [
+      { cat: '비NCS', name: '기업자원통합관리', minH: 80, maxH: 112, term: '2', required: true, basis: '기준서 비NCS 교과', note: '2학기 필수' }
+    ],
+    checklist: [
+      common('total_hours', '총 운영시간 충족', 'auto', '교과별 시간 합계 1,200h', true),
+      common('ratio', '이론/실습 비율 허용오차 이내', 'auto', '이론 20% 실습 80% ±허용오차', true),
+      common('required', '필수 편성교과(시간·학기)', 'auto', '필수 편성교과와 교과목 편성기준 표', true),
+      common('topics', '필수 교수요목 반영', 'auto', '교수계획 내 키워드 확인(합 11h)', true),
+      common('liberal_min', '교양교과 32h 이상', 'auto', '교양교과 시간 합계', true),
+      common('major_hours', '전공교과 기준시간 충족', 'auto', '기준값 입력 시에만 검사', true),
+      common('project_hours', '프로젝트실습 시간 충족', 'auto', '기준값 입력 시에만 검사', true),
+      common('safety', '산업안전교과 편성', 'auto', '2학기 16h 이상, 연구실안전 6h', true),
+      common('ai_use', 'AI활용 교과 편성', 'auto', '인정 목록 1과목 이상, 16h 이상', true),
+      common('industry_ai', '산업AI 교과 편성', 'auto', '일반계고는 기본 사용 안 함', false),
+      common('max_course_hours', '과목당 120h 이내(NCS 제외)', 'auto', '', true),
+      common('non_ncs_count', '비NCS 전공교과 4과목 이내', 'auto', '', true),
+      common('name_format', '신규 교과명 형식', 'auto', '숫자·특수문자·10자 초과', true),
+      common('dup_names', '교과명 중복 없음', 'auto', '', true),
+      common('one_term', '1개 교과 2개 학기 이상 편성 불가', 'auto', '', true),
+      common('ncs_units', 'NCS 능력단위 규칙', 'auto', '교과당 4개 이내, 중복 불가', true),
+      common('cross_check', '표지·총괄표·교수계획 일치', 'auto', '읽기 오류 점검', true),
+      common('m_common', '계열공통교과 전체 시간의 10~20%', 'manual', '계열공통/특화전공은 PDF에서 구분되지 않아 수동 확인', true),
+      common('m_newdept', '신설·개편 학과 교과 변경 제한', 'manual', '', true)
+    ],
+    format: { nameRule: true, noDigit: true, noSpecial: true, maxLen: 10, noDup: true, oneTerm: true, ncsMaxUnits: 4, ncsNoDup: true, levelMin: '', levelMax: '', knownNames: '참人폴리텍생활과비전' }
+  };
+}
+
+/* ====== 핵심 로직 (화면과 분리된 순수 함수) : PDF 읽기 + 검수 ====== */
+var nz = function (s) { return String(s == null ? '' : s).replace(/[\s\u00a0]+/g, ''); };
+var isNum = function (s) { return /^\d+$/.test(nz(s)); };
+var CODE_RE = /^\d{8,10}_\d{2}v\d+$/;
+
+/* pdf.js 글자 조각(items)을 "행(row)"과 "칸(cell)"으로 묶는다 */
+function buildRows(items) {
+  var its = [];
+  items.forEach(function (i) {
+    if (i.str && i.str.trim()) its.push({ s: i.str, x: i.transform[4], w: i.width || 0, y: i.transform[5] });
+  });
+  its.sort(function (a, b) { return b.y - a.y; });
+  var rows = [];
+  its.forEach(function (it) {
+    var r = null;
+    for (var k = rows.length - 1; k >= 0 && k >= rows.length - 4; k--) { if (Math.abs(rows[k].y - it.y) <= 4) { r = rows[k]; break; } }
+    if (!r) { r = { y: it.y, items: [] }; rows.push(r); }
+    r.items.push(it);
+  });
+  rows.forEach(function (r) {
+    r.items.sort(function (a, b) { return a.x - b.x; });
+    r.cells = [];
+    r.items.forEach(function (it) {
+      var last = r.cells[r.cells.length - 1];
+      var chars = [];
+      var L = it.s.length;
+      for (var k = 0; k < L; k++) chars.push({ c: it.s[k], x: it.x + it.w * k / L });
+      if (last && it.x - last.x2 <= Math.max(7, 0.7 * it.w)) {
+        last.s += it.s; last.x2 = it.x + it.w; last.ch = last.ch.concat(chars);
+      } else {
+        r.cells.push({ s: it.s, x: it.x, x2: it.x + it.w, ch: chars });
+      }
+    });
+    r.text = nz(r.cells.map(function (c) { return c.s; }).join(''));
+  });
+  return rows;
+}
+
+function catKind(cat) {
+  var c = nz(cat);
+  if (/교양/.test(c)) return '교양';
+  if (/기초기술/.test(c)) return '기초기술';
+  if (/교직/.test(c)) return '교직';
+  if (/전공이론/.test(c)) return '전공이론';
+  if (/전공실습|계열공통|특화전공|전공/.test(c)) return '전공실습';
+  return '기타';
+}
+
+function sameName(a, b) {
+  a = nz(a).replace(/人/g, ''); b = nz(b).replace(/人/g, '');
+  if (!a || !b) return false;
+  if (a === b) return true;
+  return (a.length >= 4 && b.length >= 4) && (a.indexOf(b) >= 0 || b.indexOf(a) >= 0);
+}
+
+/* ---------- PDF 전체 읽기 : pages = [rows, rows, ...] ---------- */
+function parseDoc(pages) {
+  var doc = { cover: {}, courses: [], aiRows: [], safetyRows: [], roadmap: { ok: false, courses: {}, totals: null }, gen: { ok: false, anchors: [] },
+    ncs: { ok: false, byCourse: {}, all: [], dup: [] }, summary: null, warnings: [], pageCount: pages.length };
+
+  /* 1) 표지 */
+  var cv = doc.cover;
+  [0, 1].forEach(function (pi) {
+    (pages[pi] || []).forEach(function (r) {
+      var t = r.text, m;
+      if (pi === 0 && (m = t.match(/^과정[:：](.+)$/))) cv.course = m[1];
+      if (pi === 0 && !cv.dept && (m = t.match(/^\((.+)\)$/))) cv.dept = m[1];
+      if (!cv.campus && (m = t.match(/한국폴리텍대학(.+?)캠퍼스/))) cv.campus = m[1];
+      if (!cv.period && (m = t.match(/(\d+)년\(([\d,]+)시간\)/))) { cv.period = m[0]; cv.hours = Number(m[2].replace(/,/g, '')); }
+      if (!cv.level && (m = t.match(/Level(\d)/i))) cv.level = Number(m[1]);
+      if (pi === 0 && !cv.track && (m = t.match(/^(직종|전공)[:：](.+)$/))) cv.track = m[2];
+    });
+  });
+  if (!cv.course) {
+    var t0 = pages[0] ? pages[0].map(function (r) { return r.text; }).join('|') : '';
+    if (/기능장/.test(t0)) cv.course = '기능장'; else if (/일반계고/.test(t0)) cv.course = '일반계고위탁과정';
+  }
+
+  /* 2) 표(총괄표, AI·산업안전, 로드맵, 교과목구성, NCS)와 3) 교과목별 상세 페이지 */
+  var sec = null, valXs = null, lastLabel = '';
+  var rmOn = false, rmAnch = null, genOn = false, genStart = false, ncsOn = false;
+  var G = [], N = [], curCourse = null, detailSeen = false;
+
+  pages.forEach(function (rows, pi) {
+    var isDetail = rows.some(function (r) { return r.cells.some(function (c) { return nz(c.s) === '교과목명'; }); }) &&
+                   rows.some(function (r) { return r.cells.some(function (c) { return nz(c.s) === '대상학과'; }); });
+    var isEval = rows.some(function (r) { return /수행평가서/.test(r.text); });
+    if (isDetail) { detailSeen = true; curCourse = parseDetail(rows, pi, doc); return; }
+    if (isEval) return;
+    if (detailSeen) { if (curCourse) parsePlan(curCourse, rows); return; }
+
+    rows.forEach(function (r) {
+      var rt = r.text;
+      var Y = pi * 2000 + (1000 - r.y);
+      /* 일반계고 총괄표 : 1200(100%) 128(10.67%) ... */
+      var pc = r.cells.filter(function (c) { return /^\d+\(\d+(\.\d+)?%\)$/.test(nz(c.s)); });
+      if (pc.length >= 3 && !doc.summary) {
+        var v = pc.map(function (c) { var m = nz(c.s).match(/^(\d+)\((\d+(?:\.\d+)?)%\)$/); return { h: Number(m[1]), p: Number(m[2]) }; });
+        doc.summary = { total: v[0].h, theory: v[1].h, practice: v[2].h, theoryPct: v[1].p };
+      }
+      /* 제목 줄 → 구역 시작/끝 */
+      if (/^([가-하]\.)?AI교과/.test(rt)) { sec = 'ai'; valXs = null; return; }
+      if (/^([가-하]\.)?산업안전교과/.test(rt)) { sec = 'safety'; valXs = null; return; }
+      if (/^\d\.교육훈련과정로드맵/.test(rt)) { rmOn = true; sec = null; return; }
+      if (/^다\.교과목구성/.test(rt)) { genOn = true; sec = null; return; }
+      if (/^\d\.훈련이수체계도/.test(rt)) { genOn = false; ncsOn = false; sec = null; return; }
+      if (/^[가-하]\.전공교과/.test(rt)) { ncsOn = true; sec = null; return; }
+      if (/^2\)NCS미적용/.test(rt)) { ncsOn = false; }
+      if ((sec) && /^[가-하]\./.test(rt)) { sec = null; }
+
+      if (sec === 'ai' || sec === 'safety') {
+        var hdrT = r.cells.filter(function (c) { return /^\d학기$/.test(nz(c.s)); });
+        if (hdrT.length >= 2) return;
+        var vh = r.cells.filter(function (c) { return /^(학점|편성시간)$/.test(nz(c.s)); });
+        if (vh.length >= 2) { valXs = vh.map(function (c) { return (c.x + c.x2) / 2; }); return; }
+        if (!valXs) return;
+        var labelCells = r.cells.filter(function (c) { return c.x < 60; });
+        if (labelCells.length) lastLabel = nz(labelCells.map(function (c) { return c.s; }).join(''));
+        var nums = r.cells.filter(function (c) { return c.x >= 60 && isNum(c.s); });
+        var names = r.cells.filter(function (c) { return c.x >= 60 && !isNum(c.s) && !/^(구분|교과목명|학기)$/.test(nz(c.s)); });
+        if (!nums.length || !names.length) return;
+        nums.forEach(function (n) {
+          var cx = (n.x + n.x2) / 2, bi = 0, bd = 1e9;
+          valXs.forEach(function (vx, k) { if (Math.abs(vx - cx) < bd) { bd = Math.abs(vx - cx); bi = k; } });
+          var nm;
+          if (nums.length === 1) nm = names.map(function (c) { return nz(c.s); }).join('');
+          else {
+            var best = null, bdd = 1e9;
+            names.forEach(function (c) { var d = Math.abs((c.x + c.x2) / 2 - cx); if (d < bdd) { bdd = d; best = c; } });
+            nm = best ? nz(best.s) : '';
+          }
+          var kind = sec === 'safety' ? 'safety' : (/산업/.test(lastLabel) ? 'industryAI' : 'aiUse');
+          (kind === 'safety' ? doc.safetyRows : doc.aiRows).push({ kind: kind, name: nm, term: bi + 1, val: Number(nz(n.s)) });
+        });
+        return;
+      }
+
+      if (rmOn) {
+        var h2 = r.cells.filter(function (c) { return /^\d학기$/.test(nz(c.s)); });
+        if (h2.length >= 2) { rmAnch = h2.map(function (c) { return c.x - 13; }); return; }
+        if (!rmAnch) return;
+        var numc = r.cells.filter(function (c) { return isNum(c.s); });
+        var nonn = r.cells.filter(function (c) { return !isNum(c.s); });
+        var vals = rmAnch.map(function (ax) {
+          var f = numc.filter(function (c) { return Math.abs(c.x - ax) <= 8; })[0];
+          return f ? Number(nz(f.s)) : 0;
+        });
+        var joined = nz(nonn.map(function (c) { return c.s; }).join(''));
+        if (joined === '총계' && numc.length) { doc.roadmap.totals = vals; return; }
+        var nm2 = nonn.filter(function (c) { return c.x >= 120 && c.x <= 215 && nz(c.s).length >= 2 && !/^(소계|총계)$/.test(nz(c.s)); })[0];
+        if (nm2 && numc.length) {
+          var terms = []; vals.forEach(function (v, k) { if (v > 0) terms.push(k + 1); });
+          doc.roadmap.courses[nz(nm2.s)] = { terms: terms, credits: vals };
+          doc.roadmap.ok = true;
+        }
+        return;
+      }
+
+      if (genOn) { G.push({ r: r, Y: Y }); return; }
+      if (ncsOn) { N.push({ r: r, Y: Y }); return; }
+    });
+  });
+
+  /* 일반계고 교과목구성 표 해석 */
+  (function () {
+    var started = false, rowsOK = [];
+    G.forEach(function (g) {
+      var sub = g.r.cells.some(function (c) { return /^(소계|총계)$/.test(nz(c.s)); });
+      if (sub) { started = true; return; }
+      if (!started) return;
+      rowsOK.push(g);
+    });
+    var anchors = [];
+    rowsOK.forEach(function (g) {
+      var hc = g.r.cells.filter(function (c) { return isNum(c.s) && c.x >= 170 && c.x < 203; })[0];
+      if (hc) anchors.push({ Y: g.Y, hours: Number(nz(hc.s)), name: '', parts: [], terms: [], codes: [] });
+    });
+    if (!anchors.length) return;
+    var nearest = function (Y, lim) {
+      var b = null, bd = 1e9; anchors.forEach(function (a) { var d = Math.abs(a.Y - Y); if (d < bd) { bd = d; b = a; } });
+      return bd <= lim ? b : null;
+    };
+    rowsOK.forEach(function (g) {
+      g.r.cells.forEach(function (c) {
+        var txt = c.ch.filter(function (k) { return k.x >= 94 && k.x < 172; }).map(function (k) { return k.c; }).join('');
+        if (txt && !isNum(txt)) { var a = nearest(g.Y, 14); if (a) a.parts.push({ Y: g.Y, t: txt }); }
+        if (CODE_RE.test(nz(c.s))) { var a2 = nearest(g.Y, 70); if (a2) a2.codes.push(nz(c.s)); }
+      });
+      var tv = g.r.cells.filter(function (c) { return isNum(c.s) && c.x >= 470; });
+      if (tv.length) {
+        var a3 = nearest(g.Y, 70);
+        if (a3) tv.forEach(function (c) { if (Number(nz(c.s)) > 0) { var t = c.x < 492 ? 1 : 2; if (a3.terms.indexOf(t) < 0) a3.terms.push(t); } });
+      }
+    });
+    anchors.forEach(function (a) { a.parts.sort(function (p, q) { return p.Y - q.Y; }); a.name = nz(a.parts.map(function (p) { return p.t; }).join('')); });
+    doc.gen = { ok: true, anchors: anchors.filter(function (a) { return a.name; }) };
+    doc.gen.anchors.forEach(function (a) { if (a.codes.length) doc.ncs.byCourse[a.name] = a.codes; });
+  })();
+
+  /* 기능장 NCS 전공교과 표 해석 */
+  (function () {
+    if (!N.length) return;
+    var anchors = [], units = [];
+    var hdr = /^(교과목명|능력단위분류번호|능력단위명|학점|교육훈련시간|NCS|교과명|단원명)/;
+    N.forEach(function (g) {
+      g.r.cells.forEach(function (c) {
+        var t = nz(c.s);
+        if (CODE_RE.test(t)) units.push({ Y: g.Y, code: t });
+        else if (c.x < 140 && !isNum(t) && t.length >= 2 && !hdr.test(t) && !/^\d\)/.test(t) && !/^[가-하]\./.test(t) && !/^(소계|총계)$/.test(t)) anchors.push({ Y: g.Y, name: t });
+      });
+    });
+    units.forEach(function (u) {
+      var b = null, bd = 1e9; anchors.forEach(function (a) { var d = Math.abs(a.Y - u.Y); if (d < bd) { bd = d; b = a; } });
+      if (b && bd <= 70) { (doc.ncs.byCourse[b.name] = doc.ncs.byCourse[b.name] || []).push(u.code); }
+    });
+    doc.tableNcsCourses = anchors.map(function (a) { return a.name; });
+  })();
+
+  var all = [];
+  Object.keys(doc.ncs.byCourse).forEach(function (k) { all = all.concat(doc.ncs.byCourse[k]); });
+  doc.ncs.all = all; doc.ncs.ok = all.length > 0;
+  var seen = {}; all.forEach(function (c) { if (seen[c]) { if (doc.ncs.dup.indexOf(c) < 0) doc.ncs.dup.push(c); } seen[c] = 1; });
+
+  if (!doc.courses.length) doc.warnings.push('교과목별 상세 페이지(교수계획서)를 찾지 못했습니다. 텍스트가 없는 PDF이거나 형식이 다른 파일일 수 있습니다.');
+  return doc;
+}
+
+function parseDetail(rows, pi, doc) {
+  var iName = -1, iHdr = -1;
+  rows.forEach(function (r, i) {
+    if (iName < 0 && r.cells.some(function (c) { return nz(c.s) === '교과목명'; })) iName = i;
+    if (iHdr < 0 && r.cells.some(function (c) { return nz(c.s) === '대상학과'; })) iHdr = i;
+  });
+  var name = rows[iName + 1] ? rows[iName + 1].text : '';
+  var data = rows[iHdr + 1] || { cells: [] };
+  var hc = data.cells.filter(function (c) { return /^\d+\(\d+\)$/.test(nz(c.s)); })[0];
+  var hm = hc ? nz(hc.s).match(/^(\d+)\((\d+)\)$/) : null;
+  if (!hm) { var hp = data.cells.filter(function (c) { return /^\d+$/.test(nz(c.s)) && c.x > 250 && c.x < 450; })[0]; if (hp) hm = [0, nz(hp.s), null]; }
+  var catCell = data.cells.filter(function (c) { return /교과|전공|계열|특화/.test(c.s); })[0];
+  var catRaw = catCell ? nz(catCell.s) : '';
+  var title = '';
+  rows.slice(0, 4).forEach(function (r) { var m = r.text.match(/교수계획서\[(.+?)\]/); if (m) title = m[1]; });
+  var reqm = catRaw.match(/\((필수|선택)\)/);
+  var course = {
+    name: name, cat: (catRaw.replace(/\((필수|선택)\)/, '') || title), req: reqm ? reqm[1] : '', title: title,
+    hours: hm ? Number(hm[1]) : null, credits: hm && hm[2] != null ? Number(hm[2]) : null,
+    dept: data.cells[0] ? nz(data.cells[0].s) : '', page: pi + 1, planRows: [], planSum: 0, planOK: true, text: '', _seq: 0
+  };
+  if (!name || course.hours == null) doc.warnings.push((pi + 1) + '쪽: 교과목명 또는 교육훈련시간을 읽지 못했습니다.');
+  var start = -1;
+  rows.forEach(function (r, i) { if (start < 0 && /^3\.주요/.test(r.text)) start = i; });
+  parsePlan(course, rows.slice(start >= 0 ? start + 1 : rows.length));
+  course.text = nz(rows.map(function (r) { return r.text; }).join(''));
+  doc.courses.push(course);
+  return course;
+}
+
+function parsePlan(course, rows) {
+  rows.forEach(function (r) {
+    var seq = r.cells.filter(function (c) { return isNum(c.s) && c.x < 70; })[0];
+    if (!seq || Number(nz(seq.s)) !== course._seq + 1) { if (!/^\d+$/.test(r.text)) course.text += r.text; return; }
+    var hr = r.cells.filter(function (c) { return isNum(c.s) && c.x >= 300 && c.x <= 420 && c !== seq; })[0];
+    var nm = nz(r.cells.filter(function (c) { return c.x > 70 && c.x < (hr ? hr.x : 300); }).map(function (c) { return c.s; }).join(''));
+    var h = hr ? Number(nz(hr.s)) : null;
+    if (h == null) course.planOK = false; else course.planSum += h;
+    course.planRows.push({ name: nm, h: h });
+    course._seq = Number(nz(seq.s));
+    course.text += r.text;
+  });
+}
+
+/* ================== 검수 ================== */
+function splitList(s) { return String(s || '').split(/[,\n，、]/).map(function (x) { return nz(x); }).filter(Boolean); }
+function numOrNull(v) { if (v === '' || v == null) return null; var n = Number(v); return isNaN(n) ? null : n; }
+function pct(a, b) { return b ? Math.round(a / b * 10000) / 100 : 0; }
+function inList(name, list) { return list.some(function (n) { return nz(name) === n; }); }
+function termList(s) { return splitList(s).map(Number).filter(function (n) { return n > 0; }); }
+
+function termsOf(doc, name) {
+  var res = { known: false, terms: [] };
+  var add = function (arr) { arr.forEach(function (t) { if (res.terms.indexOf(t) < 0) res.terms.push(t); }); res.known = true; };
+  Object.keys(doc.roadmap.courses).forEach(function (k) { if (sameName(k, name)) add(doc.roadmap.courses[k].terms); });
+  if (!res.known) doc.gen.anchors.forEach(function (a) { if (sameName(a.name, name) && a.terms.length) add(a.terms); });
+  if (!res.known) doc.aiRows.concat(doc.safetyRows).forEach(function (a) { if (sameName(a.name, name)) add([a.term]); });
+  res.terms.sort();
+  return res;
+}
+
+function runChecks(C, doc, meta) {
+  var B = C.basic, F = C.format || {}, G = C.groups || {};
+  var T = (B.types || []).filter(function (t) { return t.name === meta.type; })[0] || (B.types || [])[0] || {};
+  var cs = doc.courses;
+  var res = [];
+  var hrs = function (c) { return c.hours == null ? 0 : c.hours; };
+  var sumH = function (arr) { var s = 0; arr.forEach(function (c) { s += hrs(c); }); return s; };
+  var R = function (verdict, std, act, diff, reason, ref) { return { verdict: verdict, std: std, act: act, diff: diff == null ? '' : diff, reason: reason || '', ref: ref || '' }; };
+  var worst = function (list) { return list.indexOf('부적합') >= 0 ? '부적합' : (list.indexOf('확인필요') >= 0 ? '확인필요' : '적합'); };
+  var inRange = function (v, mn, mx) { return (mn == null || v >= mn) && (mx == null || v <= mx); };
+  var rangeTxt = function (mn, mx, u) { u = u || ''; if (mn != null && mx != null) return mn === mx ? mn + u : mn + '~' + mx + u; if (mn != null) return mn + u + ' 이상'; if (mx != null) return mx + u + ' 이하'; return ''; };
+  var theoryCats = splitList(B.theoryCats);
+  var isTheory = function (c) { return theoryCats.indexOf(catKind(c.cat)) >= 0; };
+  var totalH = sumH(cs);
+
+  var CH = {};
+  CH.total_hours = function () {
+    var th = numOrNull(T.hours), tc = numOrNull(T.credits), msg = [], v = [];
+    if (th != null) { var ok = totalH === th; v.push(ok ? '적합' : '부적합'); msg.push('교과 시간 합계 ' + totalH + 'h, 기준 ' + th + 'h' + (ok ? '' : ' (차이 ' + (totalH - th) + 'h)')); }
+    if (B.creditCheck && tc != null) { var sc = 0; cs.forEach(function (c) { sc += c.credits || 0; }); var ok2 = sc === tc; v.push(ok2 ? '적합' : '부적합'); msg.push('학점 합계 ' + sc + ', 기준 ' + tc); }
+    if (doc.cover.hours && th != null && doc.cover.hours !== th) { v.push('확인필요'); msg.push('표지 교육훈련기간 ' + doc.cover.hours + 'h가 기준과 다름'); }
+    return R(worst(v), th + 'h', totalH + 'h', th != null ? totalH - th : '', msg.join(' / '), '상세 페이지 전체');
+  };
+  CH.ratio = function () {
+    var tp = numOrNull(B.theoryPct), tol = numOrNull(B.tolerance) || 0;
+    var th = 0, pr = 0, other = [];
+    cs.forEach(function (c) { if (isTheory(c)) th += hrs(c); else if (catKind(c.cat) === '전공실습') pr += hrs(c); else other.push(c.name); });
+    var tot = th + pr; if (!tot) return R('확인필요', '', '', '', '시간을 읽지 못했습니다.');
+    var tpct = pct(th, tot), ppct = pct(pr, tot);
+    var okT = Math.abs(tpct - tp) <= tol + 1e-9, okP = B.practicePct === '' ? true : Math.abs(ppct - numOrNull(B.practicePct)) <= tol + 1e-9;
+    var v = (okT && okP) ? '적합' : '부적합';
+    var reason = '이론 ' + th + 'h/' + tot + 'h=' + tpct + '%, 실습 ' + pr + 'h/' + tot + 'h=' + ppct + '%. 기준 이론 ' + tp + '%±' + tol + '%p(' + (tp - tol) + '~' + (tp + tol) + '%)';
+    if (other.length) { v = v === '적합' ? '확인필요' : v; reason += ' / 구분을 알 수 없는 교과: ' + other.join(','); }
+    if (doc.summary && Math.abs(doc.summary.theory - th) > 0) reason += ' / 총괄표 이론 ' + doc.summary.theory + 'h와 다름(확인필요)';
+    if (doc.summary && doc.summary.theory !== th && v === '적합') v = '확인필요';
+    return R(v, '이론 ' + tp + '% ±' + tol, '이론 ' + tpct + '% / 실습 ' + ppct + '%', Math.round((tpct - tp) * 100) / 100 + '%p', reason, '교과구분·시간');
+  };
+  CH.credits_by_cat = function () {
+    if (numOrNull(T.cLib) == null && numOrNull(T.cMajor) == null) return null;
+    var a = { 교양: 0, 기초기술: 0, 교직: 0, 전공: 0 };
+    cs.forEach(function (c) { var k = catKind(c.cat); var cr = c.credits || 0; if (k === '전공이론' || k === '전공실습') a['전공'] += cr; else if (a[k] != null) a[k] += cr; });
+    var std = { 교양: numOrNull(T.cLib), 기초기술: numOrNull(T.cBasic), 교직: numOrNull(T.cTeach), 전공: numOrNull(T.cMajor) };
+    var bad = [], txt = [];
+    Object.keys(std).forEach(function (k) { if (std[k] != null) { txt.push(k + ' ' + a[k] + '/' + std[k]); if (a[k] !== std[k]) bad.push(k + ' ' + a[k] + '학점(기준 ' + std[k] + ')'); } });
+    return R(bad.length ? '부적합' : '적합', '교양' + T.cLib + ' 기초기술' + T.cBasic + ' 교직' + T.cTeach + ' 전공' + T.cMajor, '교양' + a.교양 + ' 기초기술' + a.기초기술 + ' 교직' + a.교직 + ' 전공' + a.전공, '', bad.length ? '기준과 다른 구분: ' + bad.join(', ') : '구분별 학점 모두 일치 (' + txt.join(', ') + ')', '상세 페이지 교과구분');
+  };
+  CH.semester_credits = function () {
+    var mn = numOrNull(T.termMin), mx = numOrNull(T.termMax);
+    if (mn == null && mx == null) return null;
+    var tot = doc.roadmap.totals;
+    if (!tot) return R('확인필요', rangeTxt(mn, mx, '학점'), '', '', '교육훈련과정 로드맵 총계행을 읽지 못했습니다.');
+    var terms = tot.slice(0, tot.length).filter(function (v, k) { return true; });
+    var bad = [];
+    terms.forEach(function (v, k) { if (v > 0 || terms.length <= 2) { if (!inRange(v, mn, mx)) bad.push((k + 1) + '학기 ' + v + '학점'); } });
+    return R(bad.length ? '부적합' : '적합', rangeTxt(mn, mx, '학점'), terms.join(' / '), '', bad.length ? '범위를 벗어난 학기: ' + bad.join(', ') : '학기별 ' + terms.join(', ') + '학점이 범위 안입니다.', '교육훈련과정 로드맵');
+  };
+
+  var evalRule = function (r, out) {
+    var key = nz(r.name); var kws = splitList(r.keywords);
+    var found = cs.filter(function (c) { return nz(c.name) === key; });
+    if (!found.length && kws.length) found = cs.filter(function (c) { return kws.some(function (k) { return nz(c.name).indexOf(k) >= 0; }); });
+    var label = r.name || r.keywords;
+    var req = r.required === true || r.required === 'true' || r.required === 'Y';
+    var mn = numOrNull(r.minH), mx = numOrNull(r.maxH);
+    if (!found.length) { out.push({ v: req ? '부적합' : '적합', t: label + ': ' + (req ? '편성되지 않음' : '미편성(선택)') }); return; }
+    var h = sumH(found);
+    var v = inRange(h, mn, mx) ? '적합' : '부적합';
+    var t = label + ' ' + h + 'h(기준 ' + rangeTxt(mn, mx, 'h') + ')';
+    var allowed = termList(r.term);
+    if (allowed.length) {
+      var tm = termsOf(doc, found[0].name);
+      if (!tm.known) { v = v === '적합' ? '확인필요' : v; t += ', 편성 학기 확인 불가'; }
+      else if (tm.terms.some(function (x) { return allowed.indexOf(x) < 0; })) { v = '부적합'; t += ', 학기 ' + tm.terms.join(',') + '(기준 ' + allowed.join(',') + ')'; }
+      else t += ', ' + tm.terms.join(',') + '학기';
+    }
+    out.push({ v: v, t: t + (v === '적합' ? '' : ' ✗') });
+  };
+  CH.required = function () {
+    var out = []; (C.required || []).forEach(function (r) { if (r.name || r.keywords) evalRule(r, out); });
+    if (!out.length) return null;
+    return R(worst(out.map(function (o) { return o.v; })), (C.required || []).length + '개 교과', out.filter(function (o) { return o.v === '적합'; }).length + '개 충족', '', out.map(function (o) { return o.t; }).join(' / '), '상세 페이지');
+  };
+  CH.rules = function () {
+    var out = []; (C.rules || []).forEach(function (r) { if (r.name) evalRule(r, out); });
+    if (!out.length) return null;
+    return R(worst(out.map(function (o) { return o.v; })), (C.rules || []).length + '개 기준', out.filter(function (o) { return o.v === '적합'; }).length + '개 충족', '', out.map(function (o) { return o.t; }).join(' / '), '교과목 편성기준');
+  };
+  CH.teach_term = function () {
+    var want = termList(T.teachTerm); if (!want.length) return null;
+    var teach = cs.filter(function (c) { return catKind(c.cat) === '교직' || /^NCS(이해|교육과정|역량)/.test(c.name); });
+    if (!teach.length) return R('부적합', '교직 ' + want.join(','), '없음', '', '교직교과가 없습니다.');
+    var bad = [], unk = [];
+    teach.forEach(function (c) { var tm = termsOf(doc, c.name); if (!tm.known) unk.push(c.name); else if (tm.terms.some(function (x) { return want.indexOf(x) < 0; })) bad.push(c.name + '(' + tm.terms.join(',') + '학기)'); });
+    var v = bad.length ? '부적합' : (unk.length ? '확인필요' : '적합');
+    return R(v, want.join(',') + '학기', teach.length + '과목 확인', '', bad.length ? '기준 학기가 아님: ' + bad.join(', ') : (unk.length ? '학기를 읽지 못함: ' + unk.join(', ') : '교직교과가 ' + want.join(',') + '학기에 편성됨'), '교육훈련과정 로드맵');
+  };
+  CH.topics = function () {
+    var arr = C.topics || []; if (!arr.length) return null;
+    var out = [];
+    arr.forEach(function (t) {
+      var names = splitList(t.courses), kws = splitList(t.keywords);
+      var tg = cs.filter(function (c) { return names.some(function (n) { return sameName(c.name, n); }); });
+      if (!tg.length) { out.push({ v: '확인필요', t: t.label + ': 대상 교과(' + names.join('/') + ')가 없음' }); return; }
+      var strip = function (x) { return String(x).replace(/[,·\.\(\)ㆍ\/]/g, ''); };
+      var txt = strip(tg.map(function (c) { return c.text; }).join(''));
+      var miss = kws.filter(function (k) { return txt.indexOf(strip(k)) < 0; });
+      out.push({ v: miss.length ? '확인필요' : '적합', t: t.label + ': ' + (miss.length ? '교수계획에서 찾지 못한 키워드 ' + miss.join(',') + ' (표현이 다를 수 있어 직접 확인)' : '키워드 모두 확인') });
+    });
+    return R(worst(out.map(function (o) { return o.v; })), arr.length + '개 항목', '', '', out.map(function (o) { return o.t; }).join(' / '), '교수계획 주요구성내용');
+  };
+  CH.liberal_min = function () {
+    var g = G.liberal || {}; var mn = numOrNull(g.minH), mx = numOrNull(g.maxH);
+    if (mn == null && mx == null) return null;
+    var h = sumH(cs.filter(function (c) { return catKind(c.cat) === '교양'; }));
+    return R(inRange(h, mn, mx) ? '적합' : '부적합', rangeTxt(mn, mx, 'h'), h + 'h', mn != null ? h - mn : '', '교양교과 합계 ' + h + 'h', '교과구분=교양교과');
+  };
+  CH.major_hours = function () {
+    var mn = numOrNull(B.majorMin); if (mn == null) return null;
+    var h = sumH(cs.filter(function (c) { var k = catKind(c.cat); return k === '전공이론' || k === '전공실습'; }));
+    return R(h >= mn ? '적합' : '부적합', mn + 'h 이상', h + 'h', h - mn, '전공교과 합계 ' + h + 'h');
+  };
+  CH.project_hours = function () {
+    var mn = numOrNull(B.projectMin); if (mn == null) return null;
+    var h = sumH(cs.filter(function (c) { return /프로젝트/.test(c.name); }));
+    return R(h >= mn ? '적합' : '부적합', mn + 'h 이상', h + 'h', h - mn, '프로젝트 교과 합계 ' + h + 'h');
+  };
+  CH.safety = function () {
+    var g = G.safety || {}; if (g.use === false) return null;
+    var names = splitList(g.names), kws = splitList(g.keywords);
+    var tg = cs.filter(function (c) { return inList(c.name, names) || kws.some(function (k) { return nz(c.name).indexOf(k) >= 0; }); });
+    doc.safetyRows.forEach(function (s) { var c = cs.filter(function (x) { return sameName(x.name, s.name); })[0]; if (c && tg.indexOf(c) < 0) tg.push(c); });
+    var mn = numOrNull(g.minH);
+    if (!tg.length) return R('부적합', rangeTxt(mn, null, 'h'), '없음', '', '산업안전 교과가 편성되지 않았습니다.');
+    var h = sumH(tg), v = [], msg = [];
+    v.push(inRange(h, mn, numOrNull(g.maxH)) ? '적합' : '부적합'); msg.push(tg.map(function (c) { return c.name + ' ' + hrs(c) + 'h'; }).join(', ') + ' (기준 ' + rangeTxt(mn, numOrNull(g.maxH), 'h') + ')');
+    var al = termList(g.allowedTerms), fb = termList(g.forbiddenTerms);
+    tg.forEach(function (c) {
+      var tm = termsOf(doc, c.name);
+      if (!tm.known) { v.push('확인필요'); msg.push(c.name + ' 편성 학기 확인 불가'); return; }
+      var badT = tm.terms.filter(function (x) { return (al.length && al.indexOf(x) < 0) || fb.indexOf(x) >= 0; });
+      if (badT.length) { v.push('부적합'); msg.push(c.name + ' 편성 학기 ' + tm.terms.join(',') + ' (허용 ' + (al.join(',') || '제한 없음') + ', 불가 ' + (fb.join(',') || '없음') + ')'); }
+      else msg.push(c.name + ' ' + tm.terms.join(',') + '학기 편성');
+    });
+    var on = numOrNull(g.onlineMin);
+    if (on != null) {
+      var lab = 0; tg.forEach(function (c) { c.planRows.forEach(function (p) { if (/연구실안전/.test(p.name)) lab += p.h || 0; }); });
+      if (lab < on) { v.push('확인필요'); msg.push('연구실안전관리(온라인) ' + lab + 'h만 확인됨(기준 ' + on + 'h) — 직접 확인'); } else msg.push('연구실안전관리 ' + lab + 'h 확인');
+    }
+    return R(worst(v), rangeTxt(mn, null, 'h') + (al.length ? ', ' + al.join(',') + '학기' : ''), h + 'h', mn != null ? h - mn : '', msg.join(' / '), '산업안전 교과 표·상세 페이지');
+  };
+  CH.ai_use = function () {
+    var g = G.aiUse || {}; if (g.use === false) return null;
+    var okN = splitList(g.names), exN = splitList(g.extraNames), mn = numOrNull(g.minH);
+    var matched = cs.filter(function (c) { return inList(c.name, okN); });
+    var declared = doc.aiRows.filter(function (a) { return a.kind === 'aiUse'; }).map(function (a) { return cs.filter(function (c) { return sameName(c.name, a.name); })[0]; }).filter(Boolean);
+    var extra = cs.filter(function (c) { return inList(c.name, exN); });
+    var declOut = declared.filter(function (c) { return matched.indexOf(c) < 0; });
+    if (!matched.length) {
+      var cand = declOut.concat(extra.filter(function (c) { return declOut.indexOf(c) < 0; }));
+      if (cand.length) return R('확인필요', rangeTxt(mn, null, 'h') + ' (인정 목록 1과목 이상)', cand.map(function (c) { return c.name + ' ' + hrs(c) + 'h'; }).join(', '), '', 'AI활용 교과로 적었지만 인정 목록(9개)에 없는 과목입니다: ' + cand.map(function (c) { return c.name; }).join(', ') + '. 인정 여부를 직접 확인하세요.', 'AI교과 표');
+      return R('부적합', rangeTxt(mn, null, 'h'), '없음', '', 'AI활용 교과가 편성되지 않았습니다.');
+    }
+    var best = matched.slice().sort(function (a, b) { return hrs(b) - hrs(a); })[0];
+    var ok = matched.some(function (c) { return hrs(c) >= (mn || 0); });
+    return R(ok ? '적합' : '부적합', rangeTxt(mn, null, 'h'), matched.map(function (c) { return c.name + ' ' + hrs(c) + 'h'; }).join(', '), mn != null ? hrs(best) - mn : '', ok ? 'AI활용 인정 교과 ' + matched.map(function (c) { return c.name; }).join(', ') + ' 편성' : '인정 교과가 있으나 ' + mn + 'h 미만입니다.', 'AI교과 표·상세 페이지');
+  };
+  CH.industry_ai = function () {
+    var g = G.industryAI || {}; if (g.use === false) return null;
+    var mn = numOrNull(g.minH), mx = numOrNull(g.maxH), names = splitList(g.names), kws = splitList(g.keywords);
+    var tg = [];
+    doc.aiRows.filter(function (a) { return a.kind === 'industryAI'; }).forEach(function (a) { var c = cs.filter(function (x) { return sameName(x.name, a.name); })[0]; if (c && tg.indexOf(c) < 0) tg.push(c); });
+    cs.forEach(function (c) { if (tg.indexOf(c) < 0 && (inList(c.name, names) || (kws.length && kws.some(function (k) { return nz(c.name).indexOf(k) >= 0; })))) tg.push(c); });
+    if (!tg.length) return R('부적합', rangeTxt(mn, mx, 'h'), '없음', '', '산업AI 교과가 편성되지 않았습니다.');
+    var h = sumH(tg), ok = inRange(h, mn, mx);
+    return R(ok ? '적합' : '부적합', rangeTxt(mn, mx, 'h'), tg.map(function (c) { return c.name + ' ' + hrs(c) + 'h'; }).join(', '), mx != null && h > mx ? '+' + (h - mx) + 'h' : (mn != null && h < mn ? (h - mn) + 'h' : '0'),
+      '산업AI 합계 ' + h + 'h, 기준 ' + rangeTxt(mn, mx, 'h') + (ok ? '' : (mx != null && h > mx ? ' 초과 (Pool 표기 시간이 기준과 다를 수 있음)' : ' 미달')), 'AI교과 표·상세 페이지');
+  };
+  CH.credit_range = function () {
+    var mn = numOrNull(B.courseCreditMin), mx = numOrNull(B.courseCreditMax); if (mn == null && mx == null) return null;
+    var bad = cs.filter(function (c) { return c.credits != null && !inRange(c.credits, mn, mx); });
+    return R(bad.length ? '부적합' : '적합', rangeTxt(mn, mx, '학점'), bad.length + '과목 위반', '', bad.length ? bad.map(function (c) { return c.name + ' ' + c.credits + '학점'; }).join(', ') : '모든 과목이 범위 안입니다.', '상세 페이지');
+  };
+  CH.max_course_hours = function () {
+    var mx = numOrNull(B.courseMaxHours); if (mx == null) return null;
+    var bad = cs.filter(function (c) { return hrs(c) > mx; });
+    return R(bad.length ? '확인필요' : '적합', mx + 'h 이내', bad.length + '과목 초과', '', bad.length ? 'NCS 교과는 제외이므로 직접 확인: ' + bad.map(function (c) { return c.name + ' ' + c.hours + 'h'; }).join(', ') : '모든 과목이 ' + mx + 'h 이내입니다.', '상세 페이지');
+  };
+  CH.non_ncs_count = function () {
+    var mx = numOrNull(B.nonNcsMax); if (mx == null) return null;
+    if (!doc.ncs.ok) return R('확인필요', mx + '과목 이내', '', '', 'NCS 능력단위 표를 읽지 못해 판정할 수 없습니다.');
+    var non = cs.filter(function (c) { return catKind(c.cat) === '전공실습' && !Object.keys(doc.ncs.byCourse).some(function (k) { return sameName(k, c.name); }); });
+    return R(non.length <= mx ? '적합' : '부적합', mx + '과목 이내', non.length + '과목', non.length - mx, '비NCS 전공교과: ' + (non.map(function (c) { return c.name; }).join(', ') || '없음'), 'NCS 능력단위 표');
+  };
+  CH.name_format = function () {
+    if (!F.nameRule) return null;
+    var known = splitList(F.knownNames);
+    (C.required || []).concat(C.rules || []).forEach(function (r) { known.push(nz(r.name)); });
+    ['aiUse', 'liberal'].forEach(function (k) { known = known.concat(splitList((G[k] || {}).names)); });
+    var bad = [];
+    cs.forEach(function (c) {
+      if (inList(c.name, known)) return;
+      var p = [], n = nz(c.name);
+      if (F.noDigit && /\d/.test(n)) p.push('숫자');
+      if (F.noSpecial && /[^가-힣A-Za-z0-9ⅠⅡⅢⅣⅤ]/.test(n)) p.push('특수문자');
+      if (numOrNull(F.maxLen) && n.length > numOrNull(F.maxLen)) p.push(n.length + '자');
+      if (p.length) bad.push(c.name + '(' + p.join(',') + ')');
+    });
+    return R(bad.length ? '확인필요' : '적합', '숫자·특수문자 불가, ' + F.maxLen + '자 이내', bad.length + '과목', '', bad.length ? '신규 교과라면 수정이 필요합니다. 기존 Pool 교과면 무시하세요: ' + bad.join(', ') + ' (PDF에서는 띄어쓰기를 확인할 수 없습니다)' : '신규 교과명 형식 위반 없음', '교과목명');
+  };
+  CH.dup_names = function () {
+    var seen = {}, d = [];
+    cs.forEach(function (c) { var n = nz(c.name); if (seen[n]) { if (d.indexOf(c.name) < 0) d.push(c.name); } seen[n] = 1; });
+    return R(d.length ? '부적합' : '적합', '중복 없음', d.length + '건', '', d.length ? '중복 교과명: ' + d.join(', ') : '중복 없음', '교과목명');
+  };
+  CH.one_term = function () {
+    if (!F.oneTerm) return null;
+    var multi = [], unk = 0;
+    cs.forEach(function (c) { var tm = termsOf(doc, c.name); if (!tm.known) unk++; else if (tm.terms.length > 1) multi.push(c.name + '(' + tm.terms.join(',') + '학기)'); });
+    var onlyGen = !Object.keys(doc.roadmap.courses).length && doc.gen.ok;
+    if (multi.length) return R(onlyGen ? '확인필요' : '부적합', '1개 학기', multi.length + '과목', '', '2개 학기 이상 편성: ' + multi.join(', ') + (onlyGen ? ' (표 위치로 판독한 값이므로 직접 확인)' : ''), '로드맵/교과목 구성');
+    if (!Object.keys(doc.roadmap.courses).length && !doc.gen.ok) return R('확인필요', '1개 학기', '', '', '학기 정보를 읽지 못했습니다.');
+    return R(unk > cs.length / 2 ? '확인필요' : '적합', '1개 학기', multi.length + '과목', '', '학기가 2개 이상인 교과 없음' + (unk ? ' (학기 확인 불가 ' + unk + '과목)' : ''), '로드맵/교과목 구성');
+  };
+  CH.ncs_units = function () {
+    if (!doc.ncs.ok) return R('확인필요', '', '', '', 'NCS 능력단위 표를 읽지 못했습니다.');
+    var v = [], msg = [], mu = numOrNull(F.ncsMaxUnits);
+    if (mu != null) { var over = Object.keys(doc.ncs.byCourse).filter(function (k) { return doc.ncs.byCourse[k].length > mu; }); if (over.length) { v.push('부적합'); msg.push('능력단위 ' + mu + '개 초과: ' + over.map(function (k) { return k + '(' + doc.ncs.byCourse[k].length + ')'; }).join(', ')); } else msg.push('교과당 능력단위 ' + mu + '개 이내'); }
+    if (F.ncsNoDup) { if (doc.ncs.dup.length) { v.push('부적합'); msg.push('중복 편성 능력단위: ' + doc.ncs.dup.join(', ')); } else msg.push('능력단위 중복 없음'); }
+    var lmin = numOrNull(F.levelMin), lmax = numOrNull(F.levelMax);
+    if (lmin != null || lmax != null) { if (doc.cover.level == null) { v.push('확인필요'); msg.push('NCS 수준을 읽지 못함'); } else if (!inRange(doc.cover.level, lmin, lmax)) { v.push('부적합'); msg.push('NCS 수준 L' + doc.cover.level + '(기준 L' + lmin + '~L' + lmax + ')'); } else msg.push('NCS 수준 L' + doc.cover.level); }
+    return R(worst(v), '교과당 ' + mu + '개 이내, 중복 불가', doc.ncs.all.length + '개 능력단위', '', msg.join(' / '), 'NCS 능력단위 표');
+  };
+  CH.cross_check = function () {
+    var msg = [], v = [];
+    var bp = cs.filter(function (c) { return c.planRows.length && (!c.planOK || c.planSum !== c.hours); });
+    if (bp.length) { v.push('확인필요'); msg.push('교수계획 시간 합계가 교육훈련시간과 다름: ' + bp.map(function (c) { return c.name + '(' + c.hours + 'h vs ' + c.planSum + 'h)'; }).join(', ')); }
+    var tableNames = Object.keys(doc.roadmap.courses).concat(doc.gen.anchors.map(function (a) { return a.name; }));
+    if (tableNames.length) {
+      var miss = cs.filter(function (c) { return !tableNames.some(function (n) { return sameName(n, c.name); }); }).map(function (c) { return c.name; });
+      var extra = tableNames.filter(function (n) { return !cs.some(function (c) { return sameName(n, c.name); }); });
+      if (miss.length) { v.push('확인필요'); msg.push('편성표에 없는 상세 교과: ' + miss.join(', ')); }
+      if (extra.length) { v.push('확인필요'); msg.push('상세 페이지가 없는 편성표 교과: ' + extra.join(', ')); }
+    } else { v.push('확인필요'); msg.push('로드맵/교과목 구성 표를 읽지 못해 목록 대조를 못 했습니다.'); }
+    if (doc.summary && doc.summary.total !== totalH) { v.push('확인필요'); msg.push('총괄표 총시간 ' + doc.summary.total + 'h와 상세 합계 ' + totalH + 'h가 다름'); }
+    doc.warnings.forEach(function (w) { v.push('확인필요'); msg.push(w); });
+    return R(worst(v), '서로 일치', msg.length ? msg.length + '건 불일치' : '일치', '', msg.join(' / ') || '상세 페이지, 편성표, 교수계획 시간이 서로 일치합니다.', '전체');
+  };
+
+  (C.checklist || []).forEach(function (it) {
+    if (it.use === false || it.use === 'false') return;
+    var base = { id: it.id, name: it.name };
+    if (it.method === 'manual' || !CH[it.id]) { res.push(Object.assign(base, R('확인필요', '', '', '', (it.desc || '담당자 직접 확인') + ' — 확인 후 체크하세요.', ''), { manual: true })); return; }
+    var out;
+    try { out = CH[it.id](); } catch (e) { out = R('확인필요', '', '', '', '자동 검사 중 오류: ' + e.message); }
+    if (out) res.push(Object.assign(base, out));
+  });
+  /* 교과목 편성기준 표(탭C)는 항상 검사 */
+  if (CH.rules && !(C.checklist || []).some(function (i) { return i.id === 'rules'; })) {
+    var rr = CH.rules(); if (rr) res.push(Object.assign({ id: 'rules', name: '교과목 편성기준(탭C)' }, rr));
+  }
+  return res;
+}
+
+function summarize(items) {
+  var s = { total: items.length, ok: 0, bad: 0, chk: 0 };
+  items.forEach(function (i) { if (i.verdict === '적합') s.ok++; else if (i.verdict === '부적합') s.bad++; else s.chk++; });
+  s.verdict = s.bad > 0 ? '부적합' : (s.chk > 0 ? '확인필요' : '적합');
+  return s;
+}
+
+/* ====================== 화면 로직 ====================== */
+var $ = function (id) { return document.getElementById(id); };
+var COURSE_NAMES = { general: '일반계고위탁과정', gineungjang: '기능장 과정' };
+var curCourse = '', token = sessionStorage.getItem('tk') || '', afterLogin = null;
+var campusData = null;
+var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+
+function toast(m) { var t = $('toast'); t.textContent = m; t.style.display = 'block'; setTimeout(function () { t.style.display = 'none'; }, 2600); }
+function show(id) {
+  document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); });
+  $(id.indexOf('s-') === 0 ? id : 's-' + id).classList.add('on'); window.scrollTo(0, 0);
+}
+
+/* ---------- 서버 통신 ---------- */
+function api(body) {
+  if (API_URL.indexOf('https://script.google.com/') !== 0) return Promise.reject(new Error('index.html 의 API_URL 에 Apps Script 웹 앱 주소(…/exec)를 넣어야 합니다.'));
+  body.token = token;
+  return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok && j.code === 'AUTH') { token = ''; sessionStorage.removeItem('tk'); }
+      return j;
+    });
+}
+function loadCampuses() {
+  if (campusData) return Promise.resolve(campusData);
+  return api({ action: 'getCampuses' }).then(function (j) { if (!j.ok) throw new Error(j.message); campusData = j.data; return campusData; });
+}
+function fillCampusSelect(sel, firstLabel) {
+  sel.innerHTML = '<option value="">' + firstLabel + '</option>';
+  campusData.forEach(function (g) {
+    var og = document.createElement('optgroup'); og.label = g.group;
+    g.campuses.forEach(function (c) { var o = document.createElement('option'); o.value = c; o.textContent = c; og.appendChild(o); });
+    sel.appendChild(og);
+  });
+}
+
+/* ---------- 과정/로그인 ---------- */
+function openCourse(c) { curCourse = c; $('courseTitle').textContent = COURSE_NAMES[c]; show('s-course'); }
+function adminGate(target) {
+  afterLogin = target;
+  if (token) return enterAdmin(target);
+  $('pw').value = ''; $('loginMsg').textContent = ''; $('mLogin').classList.add('on'); setTimeout(function () { $('pw').focus(); }, 50);
+}
+function closeLogin() { $('mLogin').classList.remove('on'); }
+function enterAdmin(t) {
+  if (t === 'criteria') return show('s-pick');
+  if (t === 'history') return gotoHistory();
+  show('s-admin-home');
+}
+function doLogin() {
+  var b = $('btnLogin'); b.disabled = true; $('loginMsg').textContent = '확인 중...';
+  api({ action: 'login', password: $('pw').value }).then(function (j) {
+    if (j.ok) { token = j.data.token; sessionStorage.setItem('tk', token); closeLogin(); enterAdmin(afterLogin); }
+    else { $('loginMsg').innerHTML = '<span style="color:#dc2626">' + esc(j.message) + '</span>'; }
+  }).catch(function (e) { $('loginMsg').innerHTML = '<span style="color:#dc2626">' + esc(e.message) + '</span>'; })
+    .then(function () { b.disabled = false; });
+}
+function logout() { token = ''; sessionStorage.removeItem('tk'); toast('로그아웃되었습니다.'); }
+function needLogin() { toast('로그인 시간이 지났습니다. 다시 로그인하세요.'); adminGate(afterLogin || 'admin-home'); }
+
+/* ============ 세부기준 설정 ============ */
+var C = null, Csaved = null, critTab = 'A', critCourse = '';
+var TABS = [['A', '세부기준 설정'], ['B', '편성시간 교과 설정'], ['C', '교과목 편성기준'], ['D', '커리큘럼 체크리스트'], ['E', '교과명·NCS 규칙']];
+
+function openCriteria(course) {
+  critCourse = course; $('critTitle').textContent = COURSE_NAMES[course] + ' 세부기준'; show('s-criteria'); $('critMsg').textContent = '불러오는 중...';
+  $('critBody').innerHTML = '';
+  api({ action: 'getCriteria', course: course }).then(function (j) {
+    if (!j.ok) throw new Error(j.message);
+    C = j.data.criteria; Csaved = JSON.stringify(C);
+    $('critMsg').textContent = '저장된 버전: ' + (j.data.version || '없음(기본값)') + (j.data.savedAt ? ' · ' + j.data.savedAt : '');
+    critTab = 'A'; renderCrit();
+  }).catch(function (e) { $('critMsg').textContent = e.message; });
+}
+function renderCrit() {
+  $('critTabs').innerHTML = TABS.map(function (t) { return '<button class="' + (t[0] === critTab ? 'on' : '') + '" onclick="critTab=\'' + t[0] + '\';renderCrit()">' + t[0] + '. ' + t[1] + '</button>'; }).join('');
+  var body = $('critBody'); body.innerHTML = '';
+  ({ A: tabA, B: tabB, C: tabC, D: tabD, E: tabE })[critTab](body);
+}
+function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+function card(body, title, note) { var c = el('div', 'card'); c.appendChild(el('h3', '', title)); if (note) c.appendChild(el('div', 'note', note)); body.appendChild(c); return c; }
+
+/* 한 칸짜리 입력 */
+function field(parent, obj, k, label, type) {
+  var d = el('div'); d.appendChild(el('label', 'f', label));
+  if (type === 'bool') {
+    var cb = el('input'); cb.type = 'checkbox'; cb.checked = obj[k] !== false && obj[k] !== 'false'; cb.onchange = function () { obj[k] = cb.checked; }; d.appendChild(cb);
+  } else {
+    var i = el('input'); i.type = 'text'; i.value = obj[k] == null ? '' : obj[k];
+    i.oninput = function () { var v = i.value; obj[k] = (type === 'num' && v.trim() !== '' && !isNaN(Number(v))) ? Number(v) : v; }; d.appendChild(i);
+  }
+  parent.appendChild(d);
+}
+/* 표 입력 (항목 추가/삭제/이동) */
+function tableEditor(parent, arr, cols, newRow, opt) {
+  opt = opt || {}; var box = el('div', 'tw'); parent.appendChild(box);
+  function draw() {
+    var h = '<table><tr><th>#</th>' + cols.map(function (c) { return '<th>' + c.label + '</th>'; }).join('') + '<th>작업</th></tr>';
+    arr.forEach(function (r, i) {
+      h += '<tr><td>' + (i + 1) + '</td>' + cols.map(function (c, ci) {
+        var v = r[c.k]; if (v == null) v = '';
+        if (c.type === 'bool') return '<td style="text-align:center"><input type="checkbox" data-r="' + i + '" data-c="' + ci + '" ' + (v !== false && v !== 'false' ? 'checked' : '') + '></td>';
+        if (c.type === 'sel') return '<td><select data-r="' + i + '" data-c="' + ci + '">' + c.opts.map(function (o) { return '<option value="' + o[0] + '"' + (String(v) === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></td>';
+        return '<td><input type="text" data-r="' + i + '" data-c="' + ci + '" value="' + esc(v) + '"' + (c.ro ? ' readonly style="background:#f1f5f9"' : '') + ' style="min-width:' + (c.w || 70) + 'px"></td>';
+      }).join('') + '<td style="white-space:nowrap"><button class="mini" data-act="up" data-r="' + i + '">▲</button><button class="mini" data-act="dn" data-r="' + i + '">▼</button> <button class="d" data-act="del" data-r="' + i + '">삭제</button></td></tr>';
+    });
+    h += '</table><div style="margin-top:8px"><button class="g" data-act="add">+ 항목 추가</button></div>';
+    box.innerHTML = h;
+    box.querySelectorAll('input[type=text],select').forEach(function (n) { n.oninput = n.onchange = function () { var c = cols[n.dataset.c], v = n.value; arr[n.dataset.r][c.k] = (c.type === 'num' && v.trim() !== '' && !isNaN(Number(v))) ? Number(v) : v; }; });
+    box.querySelectorAll('input[type=checkbox]').forEach(function (n) { n.onchange = function () { arr[n.dataset.r][cols[n.dataset.c].k] = n.checked; }; });
+    box.querySelectorAll('button[data-act]').forEach(function (b) {
+      b.onclick = function () {
+        var i = Number(b.dataset.r), a = b.dataset.act;
+        if (a === 'add') arr.push(newRow());
+        if (a === 'del') { if (!confirm('이 행을 삭제할까요?')) return; arr.splice(i, 1); }
+        if (a === 'up' && i > 0) { var t = arr[i]; arr[i] = arr[i - 1]; arr[i - 1] = t; }
+        if (a === 'dn' && i < arr.length - 1) { var t2 = arr[i]; arr[i] = arr[i + 1]; arr[i + 1] = t2; }
+        draw();
+      };
+    });
+  }
+  draw();
+}
+var YN = [['true', '필수'], ['false', '선택']];
+
+function tabA(body) {
+  var B = C.basic;
+  var c1 = card(body, '총 운영시간·비율', '이론 교과 구분은 쉼표로 구분합니다(교양, 기초기술, 교직, 전공이론). 이론이 아닌 "전공실습"은 실습으로 계산합니다.');
+  var g = el('div', 'grid'); c1.appendChild(g);
+  field(g, B, 'hoursPerCredit', '1학점 기준시간(시간/학점)', 'num'); field(g, B, 'theoryPct', '이론 비율(%)', 'num'); field(g, B, 'practicePct', '실습 비율(%)', 'num');
+  field(g, B, 'tolerance', '비율 허용오차(±%p)', 'num'); field(g, B, 'theoryCats', '이론으로 보는 구분');
+  field(g, B, 'majorMin', '전공교과 기준시간(h, 비우면 검사 안 함)', 'num'); field(g, B, 'projectMin', '프로젝트실습 기준시간(h, 비우면 검사 안 함)', 'num');
+  field(g, B, 'courseCreditMin', '과목당 최소 학점', 'num'); field(g, B, 'courseCreditMax', '과목당 최대 학점', 'num');
+  field(g, B, 'courseMaxHours', '과목당 최대 시간(h)', 'num'); field(g, B, 'nonNcsMax', '비NCS 전공교과 최대 과목 수', 'num'); field(g, B, 'creditCheck', '학점 합계도 검사', 'bool');
+  var c2 = card(body, '편성 유형별 총 운영시간(운영학시수)', '검수할 때 선택하는 유형입니다. 구분별 학점·학기별 학점·교직 학기는 비워 두면 검사하지 않습니다.');
+  tableEditor(c2, B.types, [
+    { k: 'name', label: '유형명' }, { k: 'hours', label: '총 운영시간(h)', type: 'num' }, { k: 'credits', label: '운영학시수(학점)', type: 'num' },
+    { k: 'cLib', label: '교양학점', type: 'num' }, { k: 'cBasic', label: '기초기술학점', type: 'num' }, { k: 'cTeach', label: '교직학점', type: 'num' }, { k: 'cMajor', label: '전공학점', type: 'num' },
+    { k: 'termMin', label: '학기당 최소학점', type: 'num' }, { k: 'termMax', label: '학기당 최대학점', type: 'num' }, { k: 'teachTerm', label: '교직 편성 학기(전체 학기 번호)' }
+  ], function () { return { name: '', hours: '', credits: '' }; });
+  var c3 = card(body, '필수 편성교과(시간)', '교과명이 같은 교과, 또는 매칭 키워드가 교과명에 들어 있는 교과를 찾습니다. 학기는 전체 학기 번호(1~4)로 입력하며 쉼표로 여러 개 입력할 수 있습니다.');
+  tableEditor(c3, C.required, [
+    { k: 'name', label: '교과명', w: 130 }, { k: 'keywords', label: '매칭 키워드', w: 110 }, { k: 'minH', label: '최소 시간', type: 'num' }, { k: 'maxH', label: '최대 시간', type: 'num' },
+    { k: 'term', label: '편성 학기' }, { k: 'required', label: '필수', type: 'bool' }
+  ], function () { return { name: '', keywords: '', minH: '', maxH: '', term: '', required: true }; });
+  var c4 = card(body, '필수 교수요목', '교수계획(주요구성내용)에서 키워드가 있는지 확인합니다. 표현이 달라 못 찾으면 "확인필요"로 나옵니다.');
+  tableEditor(c4, C.topics, [
+    { k: 'label', label: '항목 설명', w: 220 }, { k: 'courses', label: '대상 교과(쉼표)', w: 150 }, { k: 'keywords', label: '확인 키워드(쉼표)', w: 180 }, { k: 'hours', label: '합계 시간', type: 'num' }
+  ], function () { return { label: '', courses: '', keywords: '', hours: '' }; });
+}
+function tabB(body) {
+  var defs = [['liberal', '교양교과 설정'], ['safety', '산업안전교과 설정'], ['industryAI', '산업AI교과 설정'], ['aiUse', 'AI활용교과 설정']];
+  defs.forEach(function (d) {
+    var G = C.groups[d[0]], c = card(body, d[1], d[0] === 'aiUse' ? '인정 교과명 목록에 없는 교과는 "확인필요"로 처리합니다. "추가 인정 후보"에 넣은 과목은 확인필요 사유로 안내됩니다.' : '교과명은 쉼표로 구분합니다. 학기는 전체 학기 번호입니다.');
+    var g = el('div', 'grid'); c.appendChild(g);
+    field(g, G, 'use', '사용', 'bool'); field(g, G, 'names', '인정 교과명 목록(쉼표)'); field(g, G, 'keywords', '매칭 키워드(쉼표)');
+    field(g, G, 'minH', '최소 시간(h)', 'num'); field(g, G, 'maxH', '최대 시간(h)', 'num');
+    if (d[0] !== 'liberal') { field(g, G, 'allowedTerms', '편성 가능 학기'); field(g, G, 'forbiddenTerms', '편성 불가 학기'); }
+    if (d[0] === 'safety') field(g, G, 'onlineMin', '연구실안전관리 최소 시간(h)', 'num');
+    if (d[0] === 'aiUse') field(g, G, 'extraNames', '추가 인정 후보(쉼표)');
+  });
+}
+function tabC(body) {
+  var c = card(body, '교과목 편성기준', '직접 입력합니다. 필수 여부가 "필수"인 교과가 없으면 부적합, "선택"이면 편성된 경우에만 시간·학기를 검사합니다.');
+  tableEditor(c, C.rules, [
+    { k: 'cat', label: '구분' }, { k: 'name', label: '교과목명', w: 140 }, { k: 'minH', label: '최소 시간', type: 'num' }, { k: 'maxH', label: '최대 시간', type: 'num' },
+    { k: 'term', label: '편성 학기' }, { k: 'required', label: '필수 여부', type: 'bool' }, { k: 'basis', label: '근거', w: 140 }, { k: 'note', label: '비고', w: 140 }
+  ], function () { return { cat: '', name: '', minH: '', maxH: '', term: '', required: true, basis: '', note: '' }; });
+}
+function tabD(body) {
+  var c = card(body, '커리큘럼 체크리스트', '"자동" 항목은 프로그램이 판정하고, "수동" 항목은 검수 결과에서 담당자가 체크합니다. 새로 추가한 항목은 수동입니다. 항목 번호(id)는 바꾸지 마세요.');
+  tableEditor(c, C.checklist, [
+    { k: 'id', label: '항목ID', ro: true }, { k: 'name', label: '항목명', w: 200 },
+    { k: 'method', label: '검수 방법', type: 'sel', opts: [['auto', '자동'], ['manual', '수동']] }, { k: 'desc', label: '설명', w: 260 }, { k: 'use', label: '사용', type: 'bool' }
+  ], function () { return { id: 'm_' + Date.now().toString(36), name: '', method: 'manual', desc: '', use: true }; });
+}
+function tabE(body) {
+  var F = C.format, c = card(body, '신규 교과명·NCS 규칙', '신규 교과명 형식은 PDF에서 띄어쓰기를 알 수 없어 숫자·특수문자·글자 수만 검사합니다. 기존 Pool 교과는 "예외 교과명"에 넣으세요.');
+  var g = el('div', 'grid'); c.appendChild(g);
+  field(g, F, 'nameRule', '신규 교과명 형식 검사', 'bool'); field(g, F, 'noDigit', '숫자 불가', 'bool'); field(g, F, 'noSpecial', '특수문자 불가', 'bool'); field(g, F, 'maxLen', '최대 글자 수', 'num');
+  field(g, F, 'knownNames', '예외 교과명(쉼표)'); field(g, F, 'oneTerm', '2개 학기 이상 편성 불가', 'bool'); field(g, F, 'ncsMaxUnits', '교과당 능력단위 최대 개수', 'num');
+  field(g, F, 'ncsNoDup', '능력단위 중복 불가', 'bool'); field(g, F, 'levelMin', 'NCS 수준 최소(L)', 'num'); field(g, F, 'levelMax', 'NCS 수준 최대(L)', 'num');
+}
+function saveCrit() {
+  var b = $('btnSaveCrit'); b.disabled = true; $('critMsg').textContent = '저장 중...';
+  api({ action: 'saveCriteria', course: critCourse, criteria: C }).then(function (j) {
+    if (j.code === 'AUTH') return needLogin();
+    $('critMsg').textContent = j.message; if (j.ok) { Csaved = JSON.stringify(C); toast('저장되었습니다.'); }
+  }).catch(function (e) { $('critMsg').textContent = e.message; }).then(function () { b.disabled = false; });
+}
+function loadDefaultCrit() { if (!confirm('화면의 내용을 기본값으로 바꿉니다. (저장 버튼을 눌러야 반영됩니다)')) return; C = defaultCriteria_(critCourse); renderCrit(); }
+function cancelCrit() { if (!confirm('저장하지 않은 변경을 취소합니다.')) return; C = JSON.parse(Csaved); renderCrit(); }
+
+/* ============ 교과과정 체크하기 ============ */
+var chk = { file: null, doc: null, items: null, crit: null, meta: null };
+
+function openCheck() {
+  $('checkTitle').textContent = COURSE_NAMES[curCourse] + ' · 교과과정 체크하기'; show('s-check');
+  chk = { file: null, doc: null, items: null, crit: null, meta: null };
+  $('fileInfo').textContent = '선택된 파일 없음'; $('btnRead').disabled = true; $('readOut').innerHTML = ''; $('runCard').style.display = 'none'; $('resCard').style.display = 'none'; $('readProg').textContent = '';
+  $('cDept').value = ''; $('cMgr').value = '';
+  loadCampuses().then(function () { fillCampusSelect($('cCampus'), '선택'); }).catch(function (e) { $('readOut').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
+  api({ action: 'getCriteria', course: curCourse }).then(function (j) {
+    if (!j.ok) throw new Error(j.message);
+    chk.crit = j.data.criteria; $('critVer').textContent = j.data.version || '기본값';
+    $('cType').innerHTML = chk.crit.basic.types.map(function (t) { return '<option>' + esc(t.name) + '</option>'; }).join('');
+  }).catch(function (e) { $('readOut').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
+}
+function setFile(f) {
+  if (!f) return;
+  if (!/\.pdf$/i.test(f.name)) { toast('PDF 파일만 올릴 수 있습니다.'); return; }
+  chk.file = f; $('fileInfo').textContent = f.name + ' (' + Math.round(f.size / 1024).toLocaleString() + ' KB)'; $('btnRead').disabled = false;
+  $('readOut').innerHTML = ''; $('runCard').style.display = 'none'; $('resCard').style.display = 'none';
+}
+$('file').onchange = function () { setFile(this.files[0]); };
+['dragover', 'dragenter'].forEach(function (ev) { $('drop').addEventListener(ev, function (e) { e.preventDefault(); $('drop').classList.add('over'); }); });
+['dragleave', 'drop'].forEach(function (ev) { $('drop').addEventListener(ev, function (e) { e.preventDefault(); $('drop').classList.remove('over'); }); });
+$('drop').addEventListener('drop', function (e) { setFile(e.dataTransfer.files[0]); });
+
+function readPdf() {
+  if (typeof pdfjsLib === 'undefined') { $('readOut').innerHTML = '<div class="err">PDF 읽기 도구를 불러오지 못했습니다. 인터넷 연결을 확인하고 새로고침하세요.</div>'; return; }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  var btn = $('btnRead'); btn.disabled = true; $('readOut').innerHTML = ''; $('readProg').textContent = '파일을 여는 중...';
+  var fr = new FileReader();
+  fr.onerror = function () { fail('파일을 읽지 못했습니다.'); };
+  fr.onload = function () {
+    pdfjsLib.getDocument({ data: new Uint8Array(fr.result) }).promise.then(function (pdf) {
+      var pages = [], n = pdf.numPages, chars = 0;
+      var next = function (p) {
+        if (p > n) return Promise.resolve();
+        $('readProg').textContent = '읽는 중... ' + p + ' / ' + n + '쪽';
+        return pdf.getPage(p).then(function (pg) { return pg.getTextContent(); }).then(function (tc) { chars += tc.items.length; pages.push(buildRows(tc.items)); return next(p + 1); });
+      };
+      return next(1).then(function () {
+        if (chars < 20) throw new Error('텍스트를 읽을 수 없는 PDF입니다(스캔 파일). 시스템에서 다시 출력해 주세요.');
+        var doc = parseDoc(pages);
+        chk.doc = doc; $('readProg').textContent = '읽기 완료 (' + n + '쪽)'; showRead();
+      });
+    }).catch(function (e) { fail(e.message || String(e)); });
+  };
+  fr.readAsArrayBuffer(chk.file);
+  function fail(m) { $('readProg').textContent = ''; $('readOut').innerHTML = '<div class="err">읽기 실패: ' + esc(m) + '</div>'; btn.disabled = false; }
+}
+
+function courseMatches(cv) {
+  if (!cv) return null;
+  return curCourse === 'gineungjang' ? /기능장/.test(cv) : /일반계고/.test(cv);
+}
+function showRead() {
+  var d = chk.doc, cv = d.cover, o = '';
+  $('btnRead').disabled = false;
+  var m = courseMatches(cv.course);
+  if (m === false) o += '<div class="err">선택한 과정(' + esc(COURSE_NAMES[curCourse]) + ')과 PDF의 과정(' + esc(cv.course) + ')이 다릅니다. 올바른 과정을 선택했는지 확인하세요. 검수를 진행할 수 없습니다.</div>';
+  if (m === null) o += '<div class="warn">PDF 표지에서 과정을 읽지 못했습니다. 올바른 파일인지 확인하세요.</div>';
+  if (cv.campus && campusData) { var sel = $('cCampus'); for (var i = 0; i < sel.options.length; i++) if (sel.options[i].value === cv.campus) sel.value = cv.campus; }
+  if (cv.dept) $('cDept').value = cv.dept;
+  if (curCourse === 'gineungjang' && cv.hours) { var t = $('cType'); for (var j = 0; j < t.options.length; j++) { var ty = chk.crit.basic.types[j]; if (ty && Number(ty.hours) === cv.hours) t.selectedIndex = j; } }
+  o += '<div class="note">표지: 과정 <b>' + esc(cv.course || '-') + '</b> · 학과 <b>' + esc(cv.dept || '-') + '</b> · 캠퍼스 <b>' + esc(cv.campus || '-') + '</b> · 교육훈련기간 <b>' + esc(cv.period || '-') + '</b> · NCS 수준 <b>' + (cv.level ? 'L' + cv.level : '-') + '</b></div>';
+  d.warnings.forEach(function (w) { o += '<div class="warn">' + esc(w) + '</div>'; });
+  var sumH = 0; d.courses.forEach(function (c) { sumH += c.hours || 0; });
+  o += '<h3 style="margin:14px 0 6px">읽어 온 교과 목록 (' + d.courses.length + '과목, 합계 ' + sumH + 'h)</h3><div class="note">잘못 읽은 칸은 직접 고치세요. 노란색 칸은 읽지 못한 값입니다.</div><div class="tw"><table id="cTable"><tr><th>#</th><th>교과목명</th><th>교과구분</th><th>필수/선택</th><th>시간(h)</th><th>학점</th><th>교수계획 합계</th><th>쪽</th></tr>';
+  d.courses.forEach(function (c, i) {
+    var warnH = (c.hours == null) ? ' style="background:#fff3cd"' : '';
+    o += '<tr><td>' + (i + 1) + '</td><td><input type="text" data-i="' + i + '" data-k="name" value="' + esc(c.name) + '"></td><td><input type="text" data-i="' + i + '" data-k="cat" value="' + esc(c.cat) + '"></td><td>' + esc(c.req) +
+      '</td><td><input type="text" data-i="' + i + '" data-k="hours" value="' + esc(c.hours == null ? '' : c.hours) + '"' + warnH + ' style="width:70px"></td><td><input type="text" data-i="' + i + '" data-k="credits" value="' + esc(c.credits == null ? '' : c.credits) + '" style="width:60px"></td><td' + (c.planRows.length && c.planSum !== c.hours ? ' style="background:#fff3cd"' : '') + '>' + (c.planRows.length ? c.planSum : '-') + '</td><td>' + c.page + '</td></tr>';
+  });
+  o += '</table></div>';
+  var ex = [];
+  if (d.aiRows.length) ex.push('AI교과 표: ' + d.aiRows.map(function (a) { return (a.kind === 'industryAI' ? '[산업AI] ' : '[AI활용] ') + a.name + ' ' + a.val + (curCourse === 'gineungjang' && a.val < 10 ? '학점' : 'h') + '(' + a.term + '학기)'; }).join(', '));
+  if (d.safetyRows.length) ex.push('산업안전 표: ' + d.safetyRows.map(function (a) { return a.name + ' ' + a.val + '(' + a.term + '학기)'; }).join(', '));
+  ex.push('NCS 능력단위 ' + d.ncs.all.length + '개 읽음' + (d.ncs.dup.length ? ' (중복 ' + d.ncs.dup.length + '개)' : ''));
+  ex.push(Object.keys(d.roadmap.courses).length ? '로드맵 ' + Object.keys(d.roadmap.courses).length + '과목 읽음' : (d.gen.ok ? '교과목 구성표 ' + d.gen.anchors.length + '과목 읽음' : '편성표 읽지 못함'));
+  o += '<div class="note" style="margin-top:8px">' + ex.map(esc).join('<br>') + '</div>';
+  $('readOut').innerHTML = o;
+  $('readOut').querySelectorAll('#cTable input').forEach(function (n) {
+    n.oninput = function () { var c = chk.doc.courses[n.dataset.i], k = n.dataset.k, v = n.value.trim(); if (k === 'hours' || k === 'credits') c[k] = v === '' ? null : (isNaN(Number(v)) ? null : Number(v)); else c[k] = v; };
+  });
+  $('runCard').style.display = (m === false || !d.courses.length) ? 'none' : 'block';
+  $('resCard').style.display = 'none';
+}
+
+function runCheck() {
+  if (!chk.doc || !chk.crit) return;
+  if (!$('cCampus').value || !$('cDept').value.trim()) { toast('캠퍼스와 학과를 입력하세요.'); return; }
+  var b = $('btnRun'); b.disabled = true;
+  try {
+    chk.meta = { type: $('cType').value, campus: $('cCampus').value, dept: $('cDept').value.trim(), manager: $('cMgr').value.trim() };
+    chk.items = runChecks(chk.crit, chk.doc, chk.meta);
+    chk.saved = false; renderResult();
+  } catch (e) { $('resCard').style.display = 'block'; $('resCard').innerHTML = '<div class="err">검수 중 오류: ' + esc(e.message) + '</div>'; }
+  b.disabled = false;
+}
+var VCLS = { '적합': 'ok', '부적합': 'bad', '확인필요': 'chk' };
+function resultHtml(items, meta, forPrint) {
+  var s = summarize(items), h = '';
+  h += '<h3>검수 결과' + (meta ? ' · ' + esc(meta.course || '') + ' · ' + esc(meta.campus) + ' ' + esc(meta.dept) : '') + '</h3>';
+  h += '<div class="sum"><div>전체 항목<b>' + s.total + '</b></div><div>적합<b style="color:var(--ok)">' + s.ok + '</b></div><div>부적합<b style="color:var(--bad)">' + s.bad + '</b></div><div>확인필요<b style="color:var(--chk)">' + s.chk + '</b></div><div>종합 판정<b><span class="pill ' + VCLS[s.verdict] + '">' + s.verdict + '</span></b></div></div>';
+  h += '<div class="tw"><table><tr><th>항목</th><th>판정</th><th>기준값</th><th>실제값</th><th>차이</th><th>사유</th><th>근거</th></tr>';
+  items.forEach(function (it, i) {
+    h += '<tr class="v-' + VCLS[it.verdict] + '"><td><b>' + esc(it.name) + '</b></td><td>' +
+      (it.manual && !forPrint ? '<label><input type="checkbox" data-m="' + i + '" ' + (it.verdict === '적합' ? 'checked' : '') + '> 확인함</label><br>' : '') +
+      '<span class="pill ' + VCLS[it.verdict] + '">' + it.verdict + '</span></td><td>' + esc(it.std) + '</td><td>' + esc(it.act) + '</td><td>' + esc(it.diff) + '</td><td>' + esc(it.reason) + '</td><td>' + esc(it.ref) + '</td></tr>';
+  });
+  return h + '</table></div>';
+}
+function renderResult() {
+  var rc = $('resCard'); rc.style.display = 'block';
+  var meta = Object.assign({ course: COURSE_NAMES[curCourse] }, chk.meta);
+  rc.innerHTML = resultHtml(chk.items, meta) + '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><button class="b" id="btnSaveRes" onclick="saveRes()">결과 저장</button><button class="g" onclick="printRes()">결과 인쇄(A4 가로)</button><button class="g" onclick="csvRes()">CSV 다운로드</button></div><div class="msg" id="saveMsg"></div>';
+  rc.querySelectorAll('input[data-m]').forEach(function (n) {
+    n.onchange = function () { chk.items[n.dataset.m].verdict = n.checked ? '적합' : '확인필요'; chk.saved = false; renderResult(); };
+  });
+}
+function saveRes() {
+  var b = $('btnSaveRes'); b.disabled = true; $('saveMsg').textContent = '저장 중...';
+  var s = summarize(chk.items);
+  var courses = chk.doc.courses.map(function (c) { return { name: c.name, cat: c.cat, req: c.req, hours: c.hours, credits: c.credits, page: c.page }; });
+  api({ action: 'saveResult', course: curCourse, campus: chk.meta.campus, dept: chk.meta.dept, manager: chk.meta.manager, type: chk.meta.type, fileName: chk.file ? chk.file.name : '',
+    result: { summary: s, items: chk.items, courses: courses, cover: chk.doc.cover } })
+    .then(function (j) { $('saveMsg').innerHTML = j.ok ? '<span style="color:#16a34a">' + esc(j.message) + ' 검수번호 ' + esc(j.data.id) + '</span>' : '<span style="color:#dc2626">' + esc(j.message) + '</span>'; if (j.ok) toast('저장되었습니다.'); })
+    .catch(function (e) { $('saveMsg').innerHTML = '<span style="color:#dc2626">' + esc(e.message) + '</span>'; })
+    .then(function () { b.disabled = false; });
+}
+function printRes() {
+  var meta = Object.assign({ course: COURSE_NAMES[curCourse] }, chk.meta);
+  $('printArea').innerHTML = '<div style="font-size:11px;margin-bottom:4px">한국폴리텍대학 교육운영계획서 검토 지원 프로그램 · 검수일 ' + new Date().toLocaleDateString('ko-KR') + ' · 담당자 ' + esc(meta.manager) + '</div>' + resultHtml(chk.items, meta, true);
+  document.body.classList.add('printing'); setTimeout(function () { window.print(); document.body.classList.remove('printing'); }, 100);
+}
+function csvEsc(v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+function downloadCsv(name, rows) {
+  var txt = '\ufeff' + rows.map(function (r) { return r.map(csvEsc).join(','); }).join('\r\n');
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], { type: 'text/csv;charset=utf-8' })); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+}
+function csvRes() {
+  var rows = [['과정', '캠퍼스', '학과', '담당자', '항목', '판정', '기준값', '실제값', '차이', '사유', '근거']];
+  chk.items.forEach(function (i) { rows.push([COURSE_NAMES[curCourse], chk.meta.campus, chk.meta.dept, chk.meta.manager, i.name, i.verdict, i.std, i.act, i.diff, i.reason, i.ref]); });
+  downloadCsv('검수결과_' + chk.meta.campus + '_' + chk.meta.dept + '.csv', rows);
+}
+
+/* ============ 검수 내역 ============ */
+var hist = [];
+function gotoHistory() {
+  if (!token) { afterLogin = 'history'; return adminGate('history'); }
+  show('s-history'); $('hCount').textContent = '불러오는 중...';
+  loadCampuses().then(function () {
+    var s = $('hCampus'), keep = s.value; fillCampusSelect(s, '전체'); s.value = keep;
+    return api({ action: 'listResults' });
+  }).then(function (j) {
+    if (j.code === 'AUTH') { needLogin(); return; }
+    if (!j.ok) throw new Error(j.message);
+    hist = j.data; renderHistory();
+  }).catch(function (e) { $('hCount').textContent = e.message; });
+}
+function filtered() {
+  var c = $('hCourse').value, ca = $('hCampus').value, v = $('hVerdict').value, f = $('hFrom').value.trim(), t = $('hTo').value.trim(), q = $('hQ').value.trim();
+  return hist.filter(function (r) {
+    if (c && r.course !== c) return false; if (ca && r.campus !== ca) return false; if (v && r.verdict !== v) return false;
+    var d = r.at.slice(0, 10); if (f && d < f) return false; if (t && d > t) return false;
+    if (q && (r.dept + r.manager + r.id + r.file).indexOf(q) < 0) return false; return true;
+  });
+}
+function renderHistory() {
+  var list = filtered(), h = '<tr><th>검수번호</th><th>검수일시</th><th>과정</th><th>캠퍼스</th><th>학과</th><th>담당자</th><th>종합판정</th><th>부적합</th><th>확인필요</th><th>재검수</th></tr>';
+  var seen = {}; var first = {};
+  hist.slice().reverse().forEach(function (r) { var k = r.course + '|' + r.campus + '|' + r.dept; if (first[k] == null) first[k] = r.id; });
+  list.forEach(function (r) {
+    var k = r.course + '|' + r.campus + '|' + r.dept;
+    h += '<tr style="cursor:pointer" onclick="showDetail(\'' + esc(r.id) + '\')"><td>' + esc(r.id) + '</td><td>' + esc(r.at) + '</td><td>' + esc(r.course) + '</td><td>' + esc(r.campus) + '</td><td>' + esc(r.dept) + '</td><td>' + esc(r.manager) + '</td><td><span class="pill ' + VCLS[r.verdict] + '">' + esc(r.verdict) + '</span></td><td>' + r.bad + '</td><td>' + r.chk + '</td><td>' + (first[k] !== r.id ? '재검수' : '') + '</td></tr>';
+  });
+  $('hTable').innerHTML = h; $('hCount').textContent = list.length + '건 (전체 ' + hist.length + '건)';
+}
+function historyCsv() {
+  var rows = [['검수번호', '검수일시', '과정', '캠퍼스', '학과', '담당자', '편성유형', '종합판정', '적합', '부적합', '확인필요', '파일명']];
+  filtered().forEach(function (r) { rows.push([r.id, r.at, r.course, r.campus, r.dept, r.manager, r.type, r.verdict, r.ok, r.bad, r.chk, r.file]); });
+  downloadCsv('검수내역.csv', rows);
+}
+function showDetail(id) {
+  var r = hist.filter(function (x) { return x.id === id; })[0];
+  $('detailBody').innerHTML = '<div class="note">불러오는 중...</div>'; $('mDetail').classList.add('on');
+  api({ action: 'getResultDetail', id: id }).then(function (j) {
+    if (j.code === 'AUTH') { $('mDetail').classList.remove('on'); return needLogin(); }
+    if (!j.ok) throw new Error(j.message);
+    var d = j.data, h = resultHtml(d.items, { course: r.course, campus: r.campus, dept: r.dept }, true);
+    h += '<h3 style="margin-top:16px">읽어 온 교과 목록</h3><div class="tw"><table><tr><th>#</th><th>교과목명</th><th>교과구분</th><th>시간</th><th>학점</th><th>쪽</th></tr>' +
+      (d.courses || []).map(function (c, i) { return '<tr><td>' + (i + 1) + '</td><td>' + esc(c.name) + '</td><td>' + esc(c.cat) + ' ' + esc(c.req) + '</td><td>' + esc(c.hours) + '</td><td>' + esc(c.credits) + '</td><td>' + esc(c.page) + '</td></tr>'; }).join('') + '</table></div>';
+    $('detailBody').innerHTML = '<div class="note">검수번호 ' + esc(id) + ' · ' + esc(r.at) + ' · 담당자 ' + esc(r.manager) + '</div>' + h;
+  }).catch(function (e) { $('detailBody').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
+}
+
+</script>
+</body>
+</html>
