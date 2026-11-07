@@ -91,6 +91,11 @@ body.hist .wrap{max-width:none;padding-left:2vw;padding-right:2vw}
 .htable th{background:#1e3a8a;color:#fff;text-align:center;vertical-align:middle;white-space:nowrap;border-color:#16307a}
 .htable td{text-align:center;vertical-align:middle}
 .htable input[type=checkbox]{margin:0;width:16px;height:16px;vertical-align:middle}
+.topbar{justify-content:space-between}
+.topbar h2{text-align:left;margin-right:auto;flex:1 1 auto}
+#s-course .topbar{flex-wrap:nowrap}
+#s-course .topbar h2{min-width:0}
+#s-course .topbar button{flex:0 0 auto;white-space:nowrap}
 </style>
 </head>
 <body class="home">
@@ -156,7 +161,7 @@ body.hist .wrap{max-width:none;padding-left:2vw;padding-right:2vw}
 <!-- 4. 검수 -->
 <section id="s-check" class="screen">
   <div class="topbar"><h2 id="checkTitle"></h2><button class="g light" onclick="openCourse(curCourse)">뒤로</button><button class="g light" onclick="show('s-main')">메인으로</button></div>
-  <div class="card">
+  <div class="card" style="display:none" id="infoCard">
     <h3>1. 검수 대상 정보</h3>
     <div class="grid">
       <div><label class="f">캠퍼스</label><select id="cCampus"><option value="">선택</option></select></div>
@@ -173,9 +178,11 @@ body.hist .wrap{max-width:none;padding-left:2vw;padding-right:2vw}
     <div class="note">PDF를 읽으면 캠퍼스와 학과가 자동으로 채워집니다. 틀리면 직접 고치세요.</div>
   </div>
   <div class="card">
-    <h3>2. 교육운영계획서 PDF</h3>
+    <h3>교육운영계획서 업로드(PDF 파일)</h3>
+    <div class="note" style="margin:-6px 0 10px">교과목구성을 분석하여 교양/기초기술교과/계열공통/특화전공 교과목을 자동 추출하여 반영합니다.</div>
     <div class="drop" id="drop" onclick="document.getElementById('file').click()">
-      <b>PDF 파일을 여기에 끌어 놓거나 클릭해서 선택하세요</b>
+      <b>교육운영계획서(PDF) 선택 또는 이곳에 파일을 끌어다 놓기</b>
+      <div style="font-size:12.5px;color:#9ca3af;margin-top:4px">예: 일반계고위탁과정, 기능장과정</div>
       <div class="note" id="fileInfo">선택된 파일 없음</div>
     </div>
     <input type="file" id="file" accept="application/pdf,.pdf" style="display:none">
@@ -1158,10 +1165,10 @@ function cancelCrit() { if (!confirm('저장하지 않은 변경을 취소합니
 var chk = { file: null, doc: null, items: null, crit: null, meta: null };
 
 function openCheck() {
-  $('checkTitle').textContent = COURSE_NAMES[curCourse] + ' · 교과과정 체크하기'; show('s-check');
+  $('checkTitle').textContent = COURSE_NAMES[curCourse] + ' 교육운영계획서 검수'; show('s-check');
   chk = { file: null, doc: null, items: null, crit: null, meta: null };
   $('fileInfo').textContent = '선택된 파일 없음'; $('btnRead').disabled = true; $('readOut').innerHTML = ''; $('runCard').style.display = 'none'; $('resCard').style.display = 'none'; $('readProg').textContent = '';
-  $('cDept').value = ''; $('cMgr').value = ''; ['cSeries','cHours','cRemark','cCbqName','cCbq600Name'].forEach(function (i) { $(i).value = ''; }); ['cCbq','cFusion','cCbq600'].forEach(function (i) { $(i).checked = false; });
+  $('infoCard').style.display = 'none'; $('cDept').value = ''; $('cMgr').value = ''; ['cSeries','cHours','cRemark','cCbqName','cCbq600Name'].forEach(function (i) { $(i).value = ''; }); ['cCbq','cFusion','cCbq600'].forEach(function (i) { $(i).checked = false; });
   loadCampuses().then(function () { fillCampusSelect($('cCampus'), '선택'); }).catch(function (e) { $('readOut').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
   api({ action: 'getCriteria', course: curCourse }).then(function (j) {
     if (!j.ok) throw new Error(j.message);
@@ -1244,7 +1251,7 @@ function showRead() {
 
 function runCheck() {
   if (!chk.doc || !chk.crit) return;
-  if (!$('cCampus').value || !$('cDept').value.trim()) { toast('캠퍼스와 학과를 입력하세요.'); return; }
+  if (!$('cCampus').value || !$('cDept').value.trim()) { $('infoCard').style.display = ''; $('infoCard').scrollIntoView({ behavior: 'smooth' }); toast('PDF에서 캠퍼스·학과를 읽지 못했습니다. 위 입력칸에 직접 입력하세요.'); return; }
   var b = $('btnRun'); b.disabled = true;
   try {
     chk.meta = { type: $('cType').value, campus: $('cCampus').value, dept: $('cDept').value.trim(), manager: $('cMgr').value.trim() };
