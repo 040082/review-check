@@ -100,6 +100,11 @@ body.course #s-course .topbar{margin-left:calc(50% - 50vw);margin-right:calc(50%
 body.course #s-course .topbar{position:relative!important;left:50%!important;transform:translateX(-50%)!important;width:100vw!important;max-width:100vw!important;margin-left:0!important;margin-right:0!important;padding:8px 28px 18px 28px!important;box-sizing:border-box!important;box-shadow:none!important;clip-path:none!important;background:#0b2a5b!important;display:flex!important;justify-content:space-between!important;align-items:center!important}
 body.course #s-course .topbar h2{text-align:left!important;margin:0 auto 0 0!important;flex:0 1 auto!important}
 body.course{overflow-x:hidden}
+.gbar{position:relative;left:50%;transform:translateX(-50%);width:100vw;box-sizing:border-box;background:#0b2a5b;padding:12px 28px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.gbar .gbarL{color:#fff;font-size:15px;line-height:1.5;text-align:left}
+.gbar .gbarR{display:flex;gap:10px;align-items:center;white-space:nowrap}
+.gbar button{white-space:nowrap}
+body{overflow-x:hidden}
 </style>
 </head>
 <body class="home">
@@ -120,7 +125,7 @@ body.course{overflow-x:hidden}
 <!-- 2. 과정 상세 -->
 <section id="s-course" class="screen">
   <div class="topbar"><h2 id="courseTitle"></h2>
-    <button class="g light" id="btnCLogin" onclick="courseLoginToggle()">관리자 로그인</button>
+    <button class="g light gLogin" id="btnCLogin" onclick="courseLoginToggle()">관리자 로그인</button>
     <button class="g light" onclick="exportCrit()">데이터 내보내기</button>
     <button class="g light" onclick="importCrit()">데이터 가져오기</button>
     <button class="g light" onclick="gotoHistory()">검수내역</button>
@@ -984,11 +989,11 @@ function doLogin() {
 }
 
 function courseLoginToggle() {
-  if (token) { logout(); }
+  if (token) { logout(); if (!$('s-course').classList.contains('on')) show('s-main'); }
   else { adminGate('course-stay'); }
   updCLogin();
 }
-function updCLogin() { var b = $('btnCLogin'); if (b) b.textContent = token ? '로그아웃' : '관리자 로그인'; }
+function updCLogin() { Array.prototype.forEach.call(document.querySelectorAll('.gLogin'), function (b) { b.textContent = token ? '로그아웃' : '관리자 로그인'; }); }
 function exportCrit() {
   var keys = Object.keys(COURSE_NAMES), out = { type: 'polytech-criteria-backup', exportedAt: new Date().toISOString(), courses: {} };
   Promise.all(keys.map(function (k) {
@@ -1403,6 +1408,26 @@ function showDetail(id) {
   }).catch(function (e) { $('detailBody').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
 }
 
+</script>
+<script>
+(function () {
+  var html = '<div class="gbarL">한국폴리텍대학<br>교육운영계획서 세부기준 검수 프로그램</div><div class="gbarR">' +
+    '<button class="g light gLogin" onclick="courseLoginToggle()">관리자 로그인</button>' +
+    '<button class="g light" onclick="exportCrit()">데이터 내보내기</button>' +
+    '<button class="g light" onclick="importCrit()">데이터 가져오기</button>' +
+    '<button class="g light" onclick="gotoHistory()">검수내역</button>' +
+    '<button class="g light" onclick="show(\'s-main\')">처음으로</button></div>';
+  ['s-admin-home', 's-pick', 's-criteria', 's-check', 's-history'].forEach(function (id) {
+    var sec = document.getElementById(id); if (!sec) return;
+    var bar = document.createElement('div'); bar.className = 'gbar'; bar.innerHTML = html;
+    sec.insertBefore(bar, sec.firstChild);
+    Array.prototype.forEach.call(sec.querySelectorAll('.topbar button'), function (b) {
+      var o = b.getAttribute('onclick') || '';
+      if (o.indexOf("show('s-main')") >= 0 || o.indexOf('logout(') >= 0) b.parentNode.removeChild(b);
+    });
+  });
+  updCLogin();
+})();
 </script>
 </body>
 </html>
