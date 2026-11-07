@@ -232,10 +232,18 @@ body{overflow-x:hidden}
 
 <!-- 로그인 모달 -->
 <div class="modal" id="mLogin"><div class="box">
-  <h3 style="margin-top:0">관리자 로그인</h3>
-  <label class="f">관리자 비밀번호</label><input type="password" id="pw" onkeydown="if(event.key==='Enter')doLogin()">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">관리자 로그인</h3><button class="g" onclick="openPw()">비밀번호 변경</button></div>
+  <label class="f" style="margin-top:12px">관리자 비밀번호</label><input type="password" id="pw" onkeydown="if(event.key==='Enter')doLogin()">
   <div class="msg" id="loginMsg"></div>
   <div style="margin-top:10px;display:flex;gap:8px"><button class="b" id="btnLogin" onclick="doLogin()">로그인</button><button class="g" onclick="closeLogin()">취소</button></div>
+</div></div>
+<div class="modal" id="mPw"><div class="box">
+  <h3 style="margin-top:0">관리자 비밀번호 변경</h3>
+  <label class="f">현재 비밀번호</label><input type="password" id="pwCur" autocomplete="off">
+  <label class="f" style="margin-top:8px">새 비밀번호 (8자 이상)</label><input type="password" id="pwNew" autocomplete="off">
+  <label class="f" style="margin-top:8px">새 비밀번호 확인</label><input type="password" id="pwNew2" autocomplete="off" onkeydown="if(event.key==='Enter')doChangePw()">
+  <div class="msg" id="pwMsg"></div>
+  <div style="margin-top:10px;display:flex;gap:8px"><button class="b" id="btnPw" onclick="doChangePw()">변경</button><button class="g" onclick="closePw()">취소</button></div>
 </div></div>
 <!-- 상세 모달 -->
 <div class="modal" id="mDetail"><div class="box wide"><div id="detailBody"></div><div style="margin-top:12px"><button class="g" onclick="document.getElementById('mDetail').classList.remove('on')">닫기</button></div></div></div>
@@ -971,6 +979,22 @@ function adminGate(target) {
   afterLogin = target;
   if (token) return enterAdmin(target);
   $('pw').value = ''; $('loginMsg').textContent = ''; $('mLogin').classList.add('on'); setTimeout(function () { $('pw').focus(); }, 50);
+}
+function openPw() {
+  closeLogin(); ['pwCur', 'pwNew', 'pwNew2'].forEach(function (i) { $(i).value = ''; }); $('pwMsg').textContent = '';
+  $('mPw').classList.add('on'); setTimeout(function () { $('pwCur').focus(); }, 50);
+}
+function closePw() { $('mPw').classList.remove('on'); $('pw').value = ''; $('loginMsg').textContent = ''; $('mLogin').classList.add('on'); }
+function doChangePw() {
+  var m = $('pwMsg'), bad = function (t) { m.innerHTML = '<span style="color:#dc2626">' + esc(t) + '</span>'; };
+  if (!$('pwCur').value) return bad('현재 비밀번호를 입력하세요.');
+  if ($('pwNew').value.length < 8) return bad('새 비밀번호는 8자 이상이어야 합니다.');
+  if ($('pwNew').value !== $('pwNew2').value) return bad('새 비밀번호 확인이 일치하지 않습니다.');
+  var b = $('btnPw'); b.disabled = true; m.textContent = '변경 중...';
+  api({ action: 'changePassword', current: $('pwCur').value, next: $('pwNew').value }).then(function (j) {
+    if (j.ok) { $('mPw').classList.remove('on'); $('pw').value = ''; $('loginMsg').innerHTML = '<span style="color:#047857">' + esc(j.message) + '</span>'; $('mLogin').classList.add('on'); }
+    else bad(j.message);
+  }).catch(function (e) { bad(e.message); }).then(function () { b.disabled = false; });
 }
 function closeLogin() { $('mLogin').classList.remove('on'); }
 function enterAdmin(t) {
