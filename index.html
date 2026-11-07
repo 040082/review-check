@@ -154,6 +154,12 @@ body.course .graypanel{background:transparent;padding:0}
       <div><label class="f">학과</label><input type="text" id="cDept"></div>
       <div><label class="f">담당자명</label><input type="text" id="cMgr"></div>
       <div><label class="f">편성 유형</label><select id="cType"></select></div>
+      <div><label class="f">계열</label><input type="text" id="cSeries"></div>
+      <div><label class="f">편성시간(h)</label><input type="text" id="cHours" placeholder="자동 계산"></div>
+      <div><label class="f">비고</label><input type="text" id="cRemark"></div>
+      <div><label class="f"><input type="checkbox" id="cCbq"> 과정평가형</label><input type="text" id="cCbqName" placeholder="자격명"></div>
+      <div><label class="f"><input type="checkbox" id="cFusion"> 융합모듈제</label></div>
+      <div><label class="f"><input type="checkbox" id="cCbq600"> 600시간 과정평가형</label><input type="text" id="cCbq600Name" placeholder="자격명"></div>
     </div>
     <div class="note">PDF를 읽으면 캠퍼스와 학과가 자동으로 채워집니다. 틀리면 직접 고치세요.</div>
   </div>
@@ -210,7 +216,7 @@ body.course .graypanel{background:transparent;padding:0}
 /* ============================================================
    ★ 여기 한 곳만 고치세요: Apps Script 웹 앱 주소(…/exec)
    ============================================================ */
-var API_URL = "https://script.google.com/macros/s/AKfycby8N1qY0F-_oR0ZXkSH2hR4_ObJaRY-HXIJJ13j5telu93xZwRKnsrb4YkrdGcoA1AVBQ/exec";
+var API_URL = "";  /* 비워 두세요. 처음 사용할 때 화면에서 주소를 입력합니다. */
 
 /* ===== 기본 기준값 (2027학년도 세부기준 붙임 4·5 기준) =====
    관리자 화면의 [기본값 불러오기]가 이 값을 사용합니다. 화면에서 고치고 [저장]하면 "기준" 시트에 저장됩니다. */
@@ -900,6 +906,11 @@ function show(id) {
 
 /* ---------- 서버 통신 ---------- */
 function api(body) {
+  if (!API_URL) API_URL = (localStorage.getItem('apiUrl') || '').trim();
+  if (API_URL.indexOf('https://script.google.com/') !== 0) {
+    var u = (prompt('Apps Script 웹 앱 주소(https://script.google.com/macros/s/…/exec)를 붙여넣으세요.\n한 번만 입력하면 이 브라우저에 저장됩니다.') || '').trim();
+    if (u.indexOf('https://script.google.com/') === 0) { API_URL = u; localStorage.setItem('apiUrl', u); }
+  }
   if (API_URL.indexOf('https://script.google.com/') !== 0) return Promise.reject(new Error('index.html 의 API_URL 에 Apps Script 웹 앱 주소(…/exec)를 넣어야 합니다.'));
   body.token = token;
   return fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
@@ -1134,7 +1145,7 @@ function openCheck() {
   $('checkTitle').textContent = COURSE_NAMES[curCourse] + ' · 교과과정 체크하기'; show('s-check');
   chk = { file: null, doc: null, items: null, crit: null, meta: null };
   $('fileInfo').textContent = '선택된 파일 없음'; $('btnRead').disabled = true; $('readOut').innerHTML = ''; $('runCard').style.display = 'none'; $('resCard').style.display = 'none'; $('readProg').textContent = '';
-  $('cDept').value = ''; $('cMgr').value = '';
+  $('cDept').value = ''; $('cMgr').value = ''; ['cSeries','cHours','cRemark','cCbqName','cCbq600Name'].forEach(function (i) { $(i).value = ''; }); ['cCbq','cFusion','cCbq600'].forEach(function (i) { $(i).checked = false; });
   loadCampuses().then(function () { fillCampusSelect($('cCampus'), '선택'); }).catch(function (e) { $('readOut').innerHTML = '<div class="err">' + esc(e.message) + '</div>'; });
   api({ action: 'getCriteria', course: curCourse }).then(function (j) {
     if (!j.ok) throw new Error(j.message);
@@ -1252,6 +1263,7 @@ function saveRes() {
   var s = summarize(chk.items);
   var courses = chk.doc.courses.map(function (c) { return { name: c.name, cat: c.cat, req: c.req, hours: c.hours, credits: c.credits, page: c.page }; });
   api({ action: 'saveResult', course: curCourse, campus: chk.meta.campus, dept: chk.meta.dept, manager: chk.meta.manager, type: chk.meta.type, fileName: chk.file ? chk.file.name : '',
+    meta: { series: $('cSeries').value.trim(), major: chk.meta.dept, hours: $('cHours').value.trim() || chk.doc.courses.reduce(function (a, c) { return a + (Number(c.hours) || 0); }, 0), cbq: $('cCbq').checked, cbqName: $('cCbqName').value.trim(), fusion: $('cFusion').checked, cbq600: $('cCbq600').checked, cbq600Name: $('cCbq600Name').value.trim(), remark: $('cRemark').value.trim() },
     result: { summary: s, items: chk.items, courses: courses, cover: chk.doc.cover } })
     .then(function (j) { $('saveMsg').innerHTML = j.ok ? '<span style="color:#16a34a">' + esc(j.message) + ' 검수번호 ' + esc(j.data.id) + '</span>' : '<span style="color:#dc2626">' + esc(j.message) + '</span>'; if (j.ok) toast('저장되었습니다.'); })
     .catch(function (e) { $('saveMsg').innerHTML = '<span style="color:#dc2626">' + esc(e.message) + '</span>'; })
@@ -1296,18 +1308,32 @@ function filtered() {
   });
 }
 function renderHistory() {
-  var list = filtered(), h = '<tr><th>검수번호</th><th>검수일시</th><th>과정</th><th>캠퍼스</th><th>학과</th><th>담당자</th><th>종합판정</th><th>부적합</th><th>확인필요</th><th>재검수</th></tr>';
-  var seen = {}; var first = {};
-  hist.slice().reverse().forEach(function (r) { var k = r.course + '|' + r.campus + '|' + r.dept; if (first[k] == null) first[k] = r.id; });
-  list.forEach(function (r) {
-    var k = r.course + '|' + r.campus + '|' + r.dept;
-    h += '<tr style="cursor:pointer" onclick="showDetail(\'' + esc(r.id) + '\')"><td>' + esc(r.id) + '</td><td>' + esc(r.at) + '</td><td>' + esc(r.course) + '</td><td>' + esc(r.campus) + '</td><td>' + esc(r.dept) + '</td><td>' + esc(r.manager) + '</td><td><span class="pill ' + VCLS[r.verdict] + '">' + esc(r.verdict) + '</span></td><td>' + r.bad + '</td><td>' + r.chk + '</td><td>' + (first[k] !== r.id ? '재검수' : '') + '</td></tr>';
+  var list = filtered();
+  var h = '<tr><th><input type="checkbox" id="hAll" onclick="hCheckAll(this.checked)"></th><th>순번</th><th>과정</th><th>대학</th><th>캠퍼스</th><th>계열</th><th>학과 전공</th><th>편성시간</th><th>과정평가형</th><th>자격명</th><th>융합모듈제</th><th>600시간 과정평가형</th><th>자격명</th><th>저장일시</th><th>판정</th><th>충족율</th><th>비고</th><th>관리</th></tr>';
+  var first = {};
+  hist.slice().reverse().forEach(function (r) { var k = r.course + '|' + r.campus + '|' + r.dept; first[k] = (first[k] || 0) + 1; r._n = first[k]; });
+  var cb = function (v) { return '<input type="checkbox" disabled' + (v ? ' checked' : '') + '>'; };
+  list.forEach(function (r, i) {
+    var rm = [r.remark, r._n > 1 ? '재검수(' + r._n + '회차)' : ''].filter(Boolean).join(' / ');
+    var rate = (r.rate === '' || r.rate == null) ? '' : r.rate + '%';
+    h += '<tr><td><input type="checkbox" class="hSel" value="' + esc(r.id) + '"></td><td>' + (i + 1) + '</td><td>' + esc(r.course) + '</td><td>' + esc(r.univ) + '</td><td>' + esc(r.campus) + '</td><td>' + esc(r.series) + '</td><td>' + esc(r.major) + '</td><td>' + esc(r.hours) + '</td><td>' + cb(r.cbq) + '</td><td>' + esc(r.cbqName) + '</td><td>' + cb(r.fusion) + '</td><td>' + cb(r.cbq600) + '</td><td>' + esc(r.cbq600Name) + '</td><td>' + esc(r.at) + '</td><td><span class="pill ' + VCLS[r.verdict] + '">' + esc(r.verdict) + '</span></td><td>' + rate + '</td><td>' + esc(rm) + '</td><td style="white-space:nowrap"><button class="g" onclick="showDetail(\'' + esc(r.id) + '\')">보기</button> <button class="g" onclick="deleteChecked()">삭제</button></td></tr>';
   });
   $('hTable').innerHTML = h; $('hCount').textContent = list.length + '건 (전체 ' + hist.length + '건)';
 }
+function hCheckAll(v) { document.querySelectorAll('.hSel').forEach(function (c) { c.checked = v; }); }
+function deleteChecked() {
+  var ids = Array.prototype.map.call(document.querySelectorAll('.hSel:checked'), function (c) { return c.value; });
+  if (!ids.length) { toast('삭제할 행의 맨 왼쪽 체크박스를 먼저 체크하세요.'); return; }
+  if (!confirm('체크한 ' + ids.length + '건의 검수 결과를 삭제합니다. 삭제하면 되돌릴 수 없습니다. 계속할까요?')) return;
+  api({ action: 'deleteResults', ids: ids }).then(function (j) {
+    if (j.code === 'AUTH') return needLogin();
+    if (!j.ok) throw new Error(j.message);
+    hist = hist.filter(function (r) { return ids.indexOf(r.id) < 0; }); renderHistory(); toast(j.message);
+  }).catch(function (e) { toast(e.message); });
+}
 function historyCsv() {
-  var rows = [['검수번호', '검수일시', '과정', '캠퍼스', '학과', '담당자', '편성유형', '종합판정', '적합', '부적합', '확인필요', '파일명']];
-  filtered().forEach(function (r) { rows.push([r.id, r.at, r.course, r.campus, r.dept, r.manager, r.type, r.verdict, r.ok, r.bad, r.chk, r.file]); });
+  var rows = [['검수번호', '검수일시', '과정', '캠퍼스', '학과', '담당자', '편성유형', '종합판정', '적합', '부적합', '확인필요', '파일명', '대학', '계열', '전공', '편성시간', '과정평가형', '자격명', '융합모듈제', '600시간 과정평가형', '자격명(600h)', '충족율', '비고']];
+  filtered().forEach(function (r) { rows.push([r.id, r.at, r.course, r.campus, r.dept, r.manager, r.type, r.verdict, r.ok, r.bad, r.chk, r.file, r.univ, r.series, r.major, r.hours, r.cbq ? 'Y' : '', r.cbqName, r.fusion ? 'Y' : '', r.cbq600 ? 'Y' : '', r.cbq600Name, r.rate, r.remark]); });
   downloadCsv('검수내역.csv', rows);
 }
 function showDetail(id) {
