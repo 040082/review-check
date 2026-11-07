@@ -82,6 +82,15 @@ body.home .foot{display:block}
 body.course{background:#e5e7eb}
 body.course #s-course .topbar{background:#0b2a5b;box-shadow:0 0 0 100vmax #0b2a5b;clip-path:inset(-100vmax -100vmax 0 -100vmax);padding:6px 0 18px;margin-bottom:34px}
 body.course .graypanel{background:transparent;padding:0}
+.hbar{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.hbar .g{background:#eef4fb;border:1px solid #1e40af;color:#1e3a8a;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer}
+.hbar .g:hover{background:#dbe8fb}
+#s-history{max-width:none;width:100%}
+body.hist .wrap{max-width:none;padding-left:2vw;padding-right:2vw}
+.htable{font-size:14px}
+.htable th{background:#1e3a8a;color:#fff;text-align:center;vertical-align:middle;white-space:nowrap;border-color:#16307a}
+.htable td{text-align:center;vertical-align:middle}
+.htable input[type=checkbox]{margin:0;width:16px;height:16px;vertical-align:middle}
 </style>
 </head>
 <body class="home">
@@ -186,16 +195,22 @@ body.course .graypanel{background:transparent;padding:0}
   <div class="topbar"><h2>검수 내역</h2><button class="g light" onclick="logout();show('s-main')">로그아웃</button><button class="g light" onclick="show('s-main')">메인으로</button></div>
   <div class="card">
     <div class="grid">
-      <div><label class="f">과정</label><select id="hCourse"><option value="">전체</option><option>일반계고위탁과정</option><option>기능장 과정</option></select></div>
+      <div><label class="f">대학</label><select id="hUniv"><option value="">전체</option></select></div>
       <div><label class="f">캠퍼스</label><select id="hCampus"><option value="">전체</option></select></div>
+      <div><label class="f">계열</label><select id="hSeries"><option value="">전체</option></select></div>
       <div><label class="f">판정</label><select id="hVerdict"><option value="">전체</option><option>적합</option><option>부적합</option><option>확인필요</option></select></div>
-      <div><label class="f">시작일</label><input type="text" id="hFrom" placeholder="2026-11-01"></div>
-      <div><label class="f">종료일</label><input type="text" id="hTo" placeholder="2026-11-30"></div>
-      <div><label class="f">검색어(학과·담당자·번호)</label><input type="text" id="hQ"></div>
+      <div><label class="f">기간(저장일) 시작</label><input type="date" id="hFrom"></div>
+      <div><label class="f">기간(저장일) 종료</label><input type="date" id="hTo"></div>
     </div>
-    <div style="margin-top:10px"><button class="b" onclick="renderHistory()">조회</button> <button class="g" onclick="historyCsv()">CSV 다운로드</button> <span class="note" id="hCount"></span></div>
+    <div style="margin-top:12px"><button class="b" onclick="renderHistory()">조회</button> <span class="note" id="hCount"></span></div>
+    <div class="hbar">
+      <button class="g" onclick="hToggleAll()">전체 선택/해제</button>
+      <button class="g" onclick="deleteChecked()">선택 삭제</button>
+      <button class="g" onclick="historyXls(false)">조회목록 엑셀로 저장</button>
+      <button class="g" onclick="historyXls(true)">전체 목록 엑셀로 저장</button>
+    </div>
   </div>
-  <div class="card tw"><table id="hTable"></table></div>
+  <div class="card tw"><table id="hTable" class="htable"></table></div>
 </section>
 </div>
 
@@ -900,6 +915,7 @@ function toast(m) { var t = $('toast'); t.textContent = m; t.style.display = 'bl
 function show(id) {
   document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('on'); });
   $(id.indexOf('s-') === 0 ? id : 's-' + id).classList.add('on'); window.scrollTo(0, 0);
+  document.body.classList.toggle('hist', $('s-history').classList.contains('on'));
   document.body.classList.toggle('course', $('s-course').classList.contains('on'));
   document.body.classList.toggle('home', $('s-main').classList.contains('on'));
 }
@@ -1296,16 +1312,43 @@ function gotoHistory() {
   }).then(function (j) {
     if (j.code === 'AUTH') { needLogin(); return; }
     if (!j.ok) throw new Error(j.message);
-    hist = j.data; renderHistory();
+    hist = j.data; fillHistFilters(); renderHistory();
   }).catch(function (e) { $('hCount').textContent = e.message; });
 }
 function filtered() {
-  var c = $('hCourse').value, ca = $('hCampus').value, v = $('hVerdict').value, f = $('hFrom').value.trim(), t = $('hTo').value.trim(), q = $('hQ').value.trim();
+  var u = $('hUniv').value, ca = $('hCampus').value, se = $('hSeries').value, v = $('hVerdict').value, f = $('hFrom').value, t = $('hTo').value;
   return hist.filter(function (r) {
-    if (c && r.course !== c) return false; if (ca && r.campus !== ca) return false; if (v && r.verdict !== v) return false;
-    var d = r.at.slice(0, 10); if (f && d < f) return false; if (t && d > t) return false;
-    if (q && (r.dept + r.manager + r.id + r.file).indexOf(q) < 0) return false; return true;
+    if (u && r.univ !== u) return false; if (ca && r.campus !== ca) return false; if (se && r.series !== se) return false; if (v && r.verdict !== v) return false;
+    var d = String(r.at).slice(0, 10); if (f && d < f) return false; if (t && d > t) return false; return true;
   });
+}
+function fillHistFilters() {
+  var keepU = $('hUniv').value, keepS = $('hSeries').value;
+  var us = [], ss = [];
+  (campusData || []).forEach(function (g) { if (us.indexOf(g.group) < 0) us.push(g.group); });
+  hist.forEach(function (r) { if (r.series && ss.indexOf(r.series) < 0) ss.push(r.series); });
+  $('hUniv').innerHTML = '<option value="">전체</option>' + us.map(function (x) { return '<option>' + esc(x) + '</option>'; }).join('');
+  $('hSeries').innerHTML = '<option value="">전체</option>' + ss.map(function (x) { return '<option>' + esc(x) + '</option>'; }).join('');
+  $('hUniv').value = keepU; $('hSeries').value = keepS;
+}
+function hToggleAll() {
+  var cs = document.querySelectorAll('.hSel'), all = Array.prototype.every.call(cs, function (c) { return c.checked; });
+  hCheckAll(!all); var a = $('hAll'); if (a) a.checked = !all;
+}
+function historyXls(all) {
+  var list = all ? hist : filtered();
+  if (!list.length) { toast('저장할 목록이 없습니다.'); return; }
+  var head = ['순번', '검수번호', '과정', '대학', '캠퍼스', '계열', '학과 전공', '편성시간', '과정평가형', '자격명', '융합모듈제', '600시간 과정평가형', '자격명(600h)', '저장일시', '판정', '충족율', '비고'];
+  var t = '<html><head><meta charset="UTF-8"></head><body><table border="1"><tr>' + head.map(function (h) { return '<th style="background:#1e3a8a;color:#fff">' + h + '</th>'; }).join('') + '</tr>';
+  list.forEach(function (r, i) {
+    var row = [i + 1, r.id, r.course, r.univ, r.campus, r.series, r.major, r.hours, r.cbq ? '✔' : '', r.cbqName, r.fusion ? '✔' : '', r.cbq600 ? '✔' : '', r.cbq600Name, r.at, r.verdict, (r.rate === '' || r.rate == null) ? '' : r.rate + '%', r.remark];
+    t += '<tr>' + row.map(function (x) { return '<td style="text-align:center">' + esc(x) + '</td>'; }).join('') + '</tr>';
+  });
+  t += '</table></body></html>';
+  var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
+  var name = (all ? '검수내역_전체_' : '검수내역_조회_') + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '.xls';
+  var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + t], { type: 'application/vnd.ms-excel;charset=utf-8' })); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); toast(list.length + '건을 엑셀 파일로 저장했습니다.');
 }
 function renderHistory() {
   var list = filtered();
